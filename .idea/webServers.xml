@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="ecc0c8de-c3c2-4929-8d0d-b38f735a04ee" name="gpuserver" url="http://192.168.42.34">
+        <fileTransfer host="192.168.42.34" port="22" rootFolder="/home/lwong" accessType="SFTP" username="lwong">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

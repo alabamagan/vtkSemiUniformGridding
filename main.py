@@ -1,4 +1,8 @@
 #!/usr/bin/python
+"""
+Author: Wong Matthew Lun
+Date: 2015-12-08 6:21PM
+"""
 
 from PolyDataHandler import CenterLineHandler, ArmSurfaceHandler
 import vtk
