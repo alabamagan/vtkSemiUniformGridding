@@ -264,7 +264,19 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
         m_vtkpoints = m_cutter.GetOutput().GetPoints()
         return m_vtkpoints
 
-    def GetSemiUniDistnaceGrid(self, m_holePerSlice, m_numberOfSlice, m_errorTolerence=1, m_startPadding = 0, m_endPadding=0):
+    def GetSemiUniDistnaceGrid(self, m_holePerSlice, m_numberOfSlice, m_errorTolerance=1, m_startPadding = 0, m_endPadding=0):
+        """
+        Obtain a set of coordinates roughly equal to a projection of periodic square grid vertex on the arm
+        surface.
+
+        :param m_holePerSlice:      [int]   Desired number of holes per slice
+        :param m_numberOfSlice:     [int]   Desired number of slices
+        :param m_errorTolerance:    [float] The maximum allowed deviation of hole coordinate from idea grid
+                                            Note that large value causes offsets to inter-hole spacing
+        :param m_startPadding:      [int]   Starting side padding where no holes will be drilled
+        :param m_endPadding:        [int]   Ending side padding where no holes will be drilled
+        :return: [list] List of hole coordinates
+        """
         vtkmath = vtk.vtkMath()
 
         if not self._centerLine._IS_READ_FLAG:
@@ -311,7 +323,7 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
                     vtkmath.Cross(l_ringSliceAlphaVect, l_ringVect,l_p1)
                     l_p2 = vtkmath.Dot(l_p1, m_average)
                     l_angleBetweenRunningAndInitialVector = vtkmath.AngleBetweenVectors(l_ringSliceAlphaVect, l_ringVect)
-                    if l_angleBetweenRunningAndInitialVector > vtkmath.RadiansFromDegrees((360.- m_holePerSlice*m_errorTolerence )/m_holePerSlice) and l_angleBetweenRunningAndInitialVector < vtkmath.RadiansFromDegrees((360. + m_holePerSlice*m_errorTolerence)/m_holePerSlice)and l_p2 > 0:
+                    if l_angleBetweenRunningAndInitialVector > vtkmath.RadiansFromDegrees((360.- m_holePerSlice*m_errorTolerance)/m_holePerSlice) and l_angleBetweenRunningAndInitialVector < vtkmath.RadiansFromDegrees((360. + m_holePerSlice*m_errorTolerance)/m_holePerSlice)and l_p2 > 0:
                         l_ringSliceAlphaVect = l_ringVect
                         l_holeList.append([l_ringVect[k] + l_sliceCenter[k] for k in xrange(3)])
                         break
@@ -354,5 +366,29 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
         m_writer.SetInputConnection(m_wintoim.GetOutputPort())
         m_writer.SetFileName(m_outFileName)
         m_writer.Write()
+
+        pass
+
+    def Drill(self, m_holelist, m_holeRadius, m_quiet=False):
+        m_totalNumOfHoles = len(m_holelist)
+        if not m_quiet:
+            print "Drilling"
+
+        for i in xrange(m_totalNumOfHoles):
+            m_sphere = vtk.vtkSphere()
+            m_sphere.SetCenter(m_holelist[i])
+            m_sphere.SetRadius(m_holeRadius)
+
+
+            clipper = vtk.vtkClipPolyData()
+            clipper.SetInputData(self._data)
+            clipper.SetClipFunction(m_sphere)
+            clipper.Update()
+
+            clipped = clipper.GetOutput()
+            self._data.DeepCopy(clipped)
+
+            if not m_quiet:
+                print "%s/%s -- %.2f %%"%(i+1, m_totalNumOfHoles, (i+1)*100/float(m_totalNumOfHoles))
 
         pass
