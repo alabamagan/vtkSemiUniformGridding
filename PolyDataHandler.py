@@ -5,6 +5,7 @@ Date: 2015-12-08 6:21PM
 """
 import vtk
 import math
+import time
 
 class CenterLineHandler(vtk.vtkPolyData):
     def __init__(self, filename):
@@ -272,7 +273,6 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
         :param m_holePerSlice:      [int]   Desired number of holes per slice
         :param m_numberOfSlice:     [int]   Desired number of slices
         :param m_errorTolerance:    [float] The maximum allowed deviation of hole coordinate from idea grid
-                                            Note that large value causes offsets to inter-hole spacing
         :param m_startPadding:      [int]   Starting side padding where no holes will be drilled
         :param m_endPadding:        [int]   Ending side padding where no holes will be drilled
         :return: [list] List of hole coordinates
@@ -287,7 +287,8 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
             m_totalDistance += self._centerLine.GetDistance(i, i-1)
 
         m_sliceSpacing = m_totalDistance/(1. + m_numberOfSlice)
-        m_intervalIndexes = self._centerLine.GetEqualDistanceIntervalsIndex(m_sliceSpacing)
+        m_intervalIndexes = self._centerLine.GetEqualDistanceIntervalsIndex(m_sliceSpacing, m_startPadding, m_endPadding)
+        self._centerLineIntervals = m_intervalIndexes
 
         m_tangents = []
         for k in xrange(len(m_intervalIndexes)):
@@ -314,6 +315,8 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
                 if math.fabs(vtkmath.Dot(l_ringSliceMasterVect, m_alphaNormal)) < 10 and vtkmath.Dot(l_ringSliceAlphaVect, l_ringAlphaVect) > 0:
                     break
 
+            l_uniformSectionDegree = 360./m_holePerSlice
+            l_sectionDegree = 360./m_holePerSlice
             l_loopbreak = 0
             l_holeList = [[l_ringSliceAlphaVect[k] + l_sliceCenter[k] for k in xrange(3) ]]
             while(len(l_holeList) < m_holePerSlice):
@@ -323,9 +326,10 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
                     vtkmath.Cross(l_ringSliceAlphaVect, l_ringVect,l_p1)
                     l_p2 = vtkmath.Dot(l_p1, m_average)
                     l_angleBetweenRunningAndInitialVector = vtkmath.AngleBetweenVectors(l_ringSliceAlphaVect, l_ringVect)
-                    if l_angleBetweenRunningAndInitialVector > vtkmath.RadiansFromDegrees((360.- m_holePerSlice*m_errorTolerance)/m_holePerSlice) and l_angleBetweenRunningAndInitialVector < vtkmath.RadiansFromDegrees((360. + m_holePerSlice*m_errorTolerance)/m_holePerSlice)and l_p2 > 0:
+                    if l_angleBetweenRunningAndInitialVector > vtkmath.RadiansFromDegrees(l_sectionDegree - m_errorTolerance/2) and l_angleBetweenRunningAndInitialVector < vtkmath.RadiansFromDegrees(l_sectionDegree + m_errorTolerance/2.)and l_p2 > 0:
                         l_ringSliceAlphaVect = l_ringVect
                         l_holeList.append([l_ringVect[k] + l_sliceCenter[k] for k in xrange(3)])
+                        l_sectionDegree += (l_uniformSectionDegree - vtkmath.DegreesFromRadians(l_angleBetweenRunningAndInitialVector))
                         break
                 if l_loopbreak == m_holePerSlice:
                     raise RuntimeError("Current error tolerence setting is to low to produce anything.")
@@ -369,9 +373,10 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
 
         pass
 
-    def Drill(self, m_holelist, m_holeRadius, m_quiet=False):
+    def SphereDrill(self, m_holelist, m_holeRadius, m_quiet=False):
         m_totalNumOfHoles = len(m_holelist)
         if not m_quiet:
+            t = time.time()
             print "Drilling"
 
         for i in xrange(m_totalNumOfHoles):
@@ -389,6 +394,7 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
             self._data.DeepCopy(clipped)
 
             if not m_quiet:
-                print "%s/%s -- %.2f %%"%(i+1, m_totalNumOfHoles, (i+1)*100/float(m_totalNumOfHoles))
-
+                print "\t%s/%s -- %.2f %%"%(i+1, m_totalNumOfHoles, (i+1)*100/float(m_totalNumOfHoles))
+        if not m_quiet:
+            print "Finished: Totaltime used = %.2f s"%(time.time() - t)
         pass

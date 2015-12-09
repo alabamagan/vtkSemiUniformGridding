@@ -18,7 +18,7 @@ def main(args):
     parser.add_option("-m", "--holesPerSlice", action="store", dest="holesPerSlice", type=int, default=5, help="Set number of holes per slice")
     parser.add_option("-n", "--numOfSlice", action="store", dest="numOfSlice", type=int ,default=5, help="Set number of slices")
     parser.add_option("-r", "--radius", action="store", dest="radius", type=float, default=5, help="Set hole radius required")
-    parser.add_option("-p", "--padding", action="store", dest="padding", type=str, default="1,0", help="Set padding level where no holes are drilled")
+    parser.add_option("-p", "--padding", action="store", dest="padding", type=str, default="20,20", help="Set padding level where no holes are drilled")
     parser.add_option("-e", "--errorTorlerance", action="store", dest="error", type=float, default=1, help="Set maximum error tolerance from idea grid in degrees")
 
     (options, args) = parser.parse_args()
@@ -37,7 +37,7 @@ def main(args):
 
     # Get a list of holes and then drill
     holelist = arm.GetSemiUniDistnaceGrid(options.holesPerSlice, options.numOfSlice, options.error, startPadding, endPadding)
-    arm.Drill(holelist, options.radius, options.quiet)
+    arm.SphereDrill(holelist, options.radius, options.quiet)
 
     clippermapper = vtk.vtkPolyDataMapper()
     clippermapper.SetInputData(arm._data)
