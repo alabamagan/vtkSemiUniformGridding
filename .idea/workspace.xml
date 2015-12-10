@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54907709-85a8-4693-898c-a5895e9771a2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../vtkHoleDistrubution/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../vtkHoleDistrubution/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../vtkHoleDistrubution/HoleDriller.py" afterPath="$PROJECT_DIR$/../vtkHoleDistrubution/HoleDriller.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../vtkHoleDistrubution/PolyDataHandler.py" afterPath="$PROJECT_DIR$/../vtkHoleDistrubution/PolyDataHandler.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HoleDriller.py" afterPath="$PROJECT_DIR$/HoleDriller.py" />
     </list>
     <ignored path="vtkHoleDitrubution.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -18,10 +18,10 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/vtkHoleDitrubution$main__1_.coverage" NAME="main quiet  Coverage Results" MODIFIED="1449628116667" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../vtkHoleDistrubution" />
+    <SUITE FILE_PATH="coverage/vtkHoleDitrubution$main__1_.coverage" NAME="main quiet  Coverage Results" MODIFIED="1449628116667" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/vtkHoleDitrubution$main.coverage" NAME="main Coverage Results" MODIFIED="1449458628822" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/vtkHoleDitrubution$main_.coverage" NAME="main  Coverage Results" MODIFIED="1449642355681" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../vtkHoleDistrubution" />
-    <SUITE FILE_PATH="coverage/vtkHoleDitrubution$PolyDataHandler.coverage" NAME="PolyDataHandler Coverage Results" MODIFIED="1449641000821" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../vtkHoleDistrubution" />
+    <SUITE FILE_PATH="coverage/vtkHoleDitrubution$main_.coverage" NAME="main  Coverage Results" MODIFIED="1449717426710" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/vtkHoleDitrubution$PolyDataHandler.coverage" NAME="PolyDataHandler Coverage Results" MODIFIED="1449641000821" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -40,12 +40,12 @@
   <component name="FileEditorManager">
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
-        <leaf>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="HoleDriller.py" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/../vtkHoleDistrubution/HoleDriller.py">
+            <entry file="file://$PROJECT_DIR$/HoleDriller.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.69168025">
-                  <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+                <state vertical-scroll-proportion="1.141925">
+                  <caret line="43" column="41" selection-start-line="43" selection-start-column="41" selection-end-line="43" selection-end-column="41" />
                   <folding>
                     <element signature="e#76#140#0" expanded="true" />
                   </folding>
@@ -56,12 +56,12 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="PolyDataHandler.py" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/../vtkHoleDistrubution/PolyDataHandler.py">
+            <entry file="file://$PROJECT_DIR$/PolyDataHandler.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="1.0277325">
-                  <caret line="218" column="0" selection-start-line="218" selection-start-column="0" selection-end-line="218" selection-end-column="0" />
+                <state vertical-scroll-proportion="1.0790378">
+                  <caret line="285" column="16" selection-start-line="285" selection-start-column="14" selection-end-line="285" selection-end-column="16" />
                   <folding>
                     <element signature="e#18#74#1" expanded="false" />
                     <element signature="e#195#445#0" expanded="false" />
@@ -90,11 +90,8 @@
                     <element signature="e#6302#6500#1" expanded="false" />
                     <element signature="e#7144#7177#0" expanded="false" />
                     <element signature="e#7257#8451#0" expanded="false" />
-                    <element signature="e#7257#7748#1" expanded="false" />
                     <element signature="e#8511#9013#0" expanded="false" />
                     <element signature="e#8511#8635#1" expanded="false" />
-                    <element signature="e#9150#13244#0" expanded="false" />
-                    <element signature="e#9150#9787#1" expanded="false" />
                     <element signature="e#13334#14595#0" expanded="false" />
                     <element signature="e#13334#13626#1" expanded="false" />
                     <element signature="e#14673#15456#0" expanded="false" />
@@ -115,7 +112,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../vtkHoleDistrubution" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -123,11 +120,11 @@
         <option value="$PROJECT_DIR$/Data/main.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/CenterLine.py" />
-        <option value="$PROJECT_DIR$/../vtkHoleDistrubution/CenterLine.py" />
-        <option value="$PROJECT_DIR$/../vtkHoleDistrubution/ArmSurface.py" />
-        <option value="$PROJECT_DIR$/../vtkHoleDistrubution/main.py" />
-        <option value="$PROJECT_DIR$/../vtkHoleDistrubution/HoleDriller.py" />
-        <option value="$PROJECT_DIR$/../vtkHoleDistrubution/PolyDataHandler.py" />
+        <option value="$PROJECT_DIR$/CenterLine.py" />
+        <option value="$PROJECT_DIR$/ArmSurface.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/PolyDataHandler.py" />
+        <option value="$PROJECT_DIR$/HoleDriller.py" />
       </list>
     </option>
   </component>
@@ -137,10 +134,10 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="65" />
-    <option name="y" value="24" />
-    <option name="width" value="1855" />
-    <option name="height" value="1056" />
+    <option name="x" value="64" />
+    <option name="y" value="-4" />
+    <option name="width" value="1857" />
+    <option name="height" value="1085" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -167,6 +164,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -201,12 +200,10 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
@@ -214,11 +211,12 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../vtkHoleDistrubution" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="SearchEverywhereHistoryKey" value="InputData&#9;null&#9;null" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/../vtkHoleDistrubution/Dump" />
+      <recent name="$PROJECT_DIR$/Dump" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -230,13 +228,13 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../vtkHoleDistrubution" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="vtkHoleDistrubution" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../vtkHoleDistrubution/HoleDriller.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/HoleDriller.py" />
       <option name="PARAMETERS" value="-q" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -248,13 +246,13 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../vtkHoleDistrubution" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="vtkHoleDistrubution" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../vtkHoleDistrubution/PolyDataHandler.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/PolyDataHandler.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -329,6 +327,11 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
@@ -454,13 +457,13 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../vtkHoleDistrubution" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="vtkHoleDistrubution" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../vtkHoleDistrubution/HoleDriller.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/HoleDriller.py" />
       <option name="PARAMETERS" value="-s ./Data/clipped_surface.stl -c ./Data/centerline.vtp -m 10 -n 8 -r 4 -e 5 -p 20,20" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -506,34 +509,40 @@
       <option name="project" value="LOCAL" />
       <updated>1449631697551</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Fix padding &#10;Fix offset due to error tolerance">
+      <created>1449642451376</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1449642451376</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
+    <frame x="64" y="-4" width="1857" height="1085" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295099" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295099" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17247097" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946378" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39937434" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3295099" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17247097" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14814815" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14648977" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946378" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14814815" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39937434" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295099" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32012513" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295099" sideWeight="0.50193477" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3295099" sideWeight="0.49806523" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295099" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -552,9 +561,9 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25317854" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295099" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -572,32 +581,33 @@
     <MESSAGE value="First Commit&#10;" />
     <MESSAGE value="Add author tags&#10;" />
     <MESSAGE value="Fully functional release" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fully functional release" />
+    <MESSAGE value="Fix padding &#10;Fix offset due to error tolerance" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix padding &#10;Fix offset due to error tolerance" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint type="python-line">
-          <url>file://$PROJECT_DIR$/../vtkHoleDistrubution/PolyDataHandler.py</url>
+          <url>file://$PROJECT_DIR$/PolyDataHandler.py</url>
           <line>46</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/../vtkHoleDistrubution/HoleDriller.py</url>
+          <url>file://$PROJECT_DIR$/HoleDriller.py</url>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/../vtkHoleDistrubution/PolyDataHandler.py</url>
+          <url>file://$PROJECT_DIR$/PolyDataHandler.py</url>
           <line>303</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/../vtkHoleDistrubution/PolyDataHandler.py</url>
+          <url>file://$PROJECT_DIR$/PolyDataHandler.py</url>
           <line>99</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/../vtkHoleDistrubution/PolyDataHandler.py</url>
+          <url>file://$PROJECT_DIR$/PolyDataHandler.py</url>
           <line>13</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
@@ -614,26 +624,20 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../vtkHoleDistrubution/Data/centerline.vtp">
+    <entry file="file://$PROJECT_DIR$/HoleDriller.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding>
+            <element signature="e#76#140#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../vtkHoleDistrubution/drilled.stl">
+    <entry file="file://$PROJECT_DIR$/PolyDataHandler.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../vtkHoleDistrubution/PolyDataHandler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0277325">
-          <caret line="218" column="0" selection-start-line="218" selection-start-column="0" selection-end-line="218" selection-end-column="0" />
           <folding>
             <element signature="e#18#74#1" expanded="false" />
             <element signature="e#195#445#0" expanded="false" />
@@ -662,11 +666,8 @@
             <element signature="e#6302#6500#1" expanded="false" />
             <element signature="e#7144#7177#0" expanded="false" />
             <element signature="e#7257#8451#0" expanded="false" />
-            <element signature="e#7257#7748#1" expanded="false" />
             <element signature="e#8511#9013#0" expanded="false" />
             <element signature="e#8511#8635#1" expanded="false" />
-            <element signature="e#9150#13244#0" expanded="false" />
-            <element signature="e#9150#9787#1" expanded="false" />
             <element signature="e#13334#14595#0" expanded="false" />
             <element signature="e#13334#13626#1" expanded="false" />
             <element signature="e#14673#15456#0" expanded="false" />
@@ -674,10 +675,75 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../vtkHoleDistrubution/HoleDriller.py">
+    <entry file="file://$PROJECT_DIR$/Data/centerline.vtp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.69168025">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/drilled.stl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.local/lib/python2.7/site-packages/vtk/util/vtkImageExportToArray.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3326157">
+          <caret line="81" column="8" selection-start-line="81" selection-start-column="8" selection-end-line="81" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PolyDataHandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0790378">
+          <caret line="285" column="16" selection-start-line="285" selection-start-column="14" selection-end-line="285" selection-end-column="16" />
+          <folding>
+            <element signature="e#18#74#1" expanded="false" />
+            <element signature="e#195#445#0" expanded="false" />
+            <element signature="e#475#1180#0" expanded="false" />
+            <element signature="e#475#673#1" expanded="false" />
+            <element signature="e#1220#1613#0" expanded="false" />
+            <element signature="e#1220#1301#1" expanded="false" />
+            <element signature="e#1703#2964#0" expanded="false" />
+            <element signature="e#1703#1995#1" expanded="false" />
+            <element signature="e#2997#3138#0" expanded="false" />
+            <element signature="e#2997#3112#1" expanded="false" />
+            <element signature="e#3187#3638#0" expanded="false" />
+            <element signature="e#3187#3481#1" expanded="false" />
+            <element signature="e#3740#4345#0" expanded="false" />
+            <element signature="e#3740#4019#1" expanded="false" />
+            <element signature="e#4382#4650#0" expanded="false" />
+            <element signature="e#4382#4475#1" expanded="false" />
+            <element signature="e#4686#4996#0" expanded="false" />
+            <element signature="e#4686#4779#1" expanded="false" />
+            <element signature="e#5070#5564#0" expanded="false" />
+            <element signature="e#5605#5638#0" expanded="false" />
+            <element signature="e#5736#6215#0" expanded="false" />
+            <element signature="e#5736#5918#1" expanded="false" />
+            <element signature="e#6247#6272#0" expanded="false" />
+            <element signature="e#6302#7103#0" expanded="false" />
+            <element signature="e#6302#6500#1" expanded="false" />
+            <element signature="e#7144#7177#0" expanded="false" />
+            <element signature="e#7257#8451#0" expanded="false" />
+            <element signature="e#8511#9013#0" expanded="false" />
+            <element signature="e#8511#8635#1" expanded="false" />
+            <element signature="e#13334#14595#0" expanded="false" />
+            <element signature="e#13334#13626#1" expanded="false" />
+            <element signature="e#14673#15456#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HoleDriller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.141925">
+          <caret line="43" column="41" selection-start-line="43" selection-start-column="41" selection-end-line="43" selection-end-column="41" />
           <folding>
             <element signature="e#76#140#0" expanded="true" />
           </folding>

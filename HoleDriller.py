@@ -40,7 +40,10 @@ def main(args):
     arm.SphereDrill(holelist, options.radius, options.quiet)
 
     clippermapper = vtk.vtkPolyDataMapper()
-    clippermapper.SetInputData(arm._data)
+    if vtk.vtkVersion().GetVTKVersion < 6:
+        clippermapper.SetInput(arm._data)
+    else:
+        clippermapper.SetInputData(arm._data)
 
     writer = vtk.vtkSTLWriter()
     writer.SetFileName(outFileName)

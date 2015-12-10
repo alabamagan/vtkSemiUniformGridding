@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../vtkHoleDistrubution/.idea/vtkHoleDitrubution.iml" filepath="$PROJECT_DIR$/../vtkHoleDistrubution/.idea/vtkHoleDitrubution.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/vtkHoleDistrubution.iml" filepath="$PROJECT_DIR$/.idea/vtkHoleDistrubution.iml" />
     </modules>
   </component>
 </project>
