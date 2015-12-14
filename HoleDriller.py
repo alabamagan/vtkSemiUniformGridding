@@ -7,7 +7,7 @@ Return error list:
 0   Success
 1   Most likely Write Failed
 2   Cannot find surface/centerline files
-3   Error tolerance errors
+3   Error tolerance errors, please set larger error tolerance
 
 """
 
@@ -26,7 +26,7 @@ def main(args):
     parser.add_option("-m", "--holesPerSlice", action="store", dest="holesPerSlice", type=int, default=5, help="Set number of holes per slice")
     parser.add_option("-n", "--numOfSlice", action="store", dest="numOfSlice", type=int ,default=5, help="Set number of slices")
     parser.add_option("-r", "--radius", action="store", dest="radius", type=float, default=5, help="Set hole radius required")
-    parser.add_option("-p", "--padding", action="store", dest="padding", type=str, default="20,20", help="Set padding level where no holes are drilled")
+    parser.add_option("-p", "--padding", action="store", dest="padding", type=str, default="20,10", help="Set padding level where no holes are drilled")
     parser.add_option("-e", "--errorTorlerance", action="store", dest="error", type=float, default=1, help="Set maximum error tolerance from idea grid in degrees")
     parser.add_option("-a", "--auto", action="store_true", dest="auto", default=False, help="Automatically determine parameters")
 
