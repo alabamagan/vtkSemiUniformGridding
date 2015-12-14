@@ -64,9 +64,9 @@ def main(args):
         writer.SetFileName(outFileName)
         writer.SetInputData(arm._data)
         if writer.Write() == 1:
-            return 0
-        else:
             return 1
+        else:
+            return 0
     except IOError:
         return 2
     except RuntimeError:
