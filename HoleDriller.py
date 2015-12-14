@@ -8,6 +8,7 @@ from PolyDataHandler import CenterLineHandler, ArmSurfaceHandler
 import vtk
 import optparse
 import sys
+import os
 
 def main(args):
     parser = optparse.OptionParser()
@@ -18,14 +19,21 @@ def main(args):
     parser.add_option("-m", "--holesPerSlice", action="store", dest="holesPerSlice", type=int, default=5, help="Set number of holes per slice")
     parser.add_option("-n", "--numOfSlice", action="store", dest="numOfSlice", type=int ,default=5, help="Set number of slices")
     parser.add_option("-r", "--radius", action="store", dest="radius", type=float, default=5, help="Set hole radius required")
-    parser.add_option("-p", "--padding", action="store", dest="padding", type=str, default="20,20", help="Set padding level where no holes are drilled")
+    parser.add_option("-p", "--padding", action="store", dest="padding", type=str, default="20,10", help="Set padding level where no holes are drilled")
     parser.add_option("-e", "--errorTorlerance", action="store", dest="error", type=float, default=1, help="Set maximum error tolerance from idea grid in degrees")
+    parser.add_option("-a", "--auto", action="store_true", dest="auto", default=False, help="Automatically determine parameters")
 
     (options, args) = parser.parse_args()
     surfaceFileName = options.surface
     centerlineFileName = options.centerline
     outFileName = options.outFileName
     [startPadding, endPadding] = [int(options.padding.split(",")[i]) for i in xrange(2)]
+
+    if not os.path.isfile(surfaceFileName):
+        raise IOError("Surface file %s dosen't exist!"%surfaceFileName)
+    if not os.path.isfile(centerlineFileName):
+        raise IOError("Centerline file %s dosen't exist!"%centerlineFileName)
+
 
     # create center line object
     cl = CenterLineHandler(centerlineFileName)
@@ -36,7 +44,7 @@ def main(args):
     arm.Read()
 
     # Get a list of holes and then drill
-    holelist = arm.GetSemiUniDistnaceGrid(options.holesPerSlice, options.numOfSlice, options.error, startPadding, endPadding)
+    holelist = arm.GetSemiUniDistnaceGrid(options.holesPerSlice, options.numOfSlice - 1, options.error, startPadding, endPadding)
     arm.SphereDrill(holelist, options.radius, options.quiet)
 
     clippermapper = vtk.vtkPolyDataMapper()

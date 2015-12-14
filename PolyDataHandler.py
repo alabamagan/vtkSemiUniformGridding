@@ -33,9 +33,40 @@ class CenterLineHandler(vtk.vtkPolyData):
         m_actor = vtk.vtkActor()
         m_actor.SetMapper(m_mapper)
 
+        # Reconstruct centerline polydata
+        m_points = vtk.vtkPoints()
+        m_rawData = m_reader.GetOutput()
+        m_rawStart = m_rawData.GetPoint(m_rawData.GetNumberOfPoints() - 2)
+        m_rawStartMiddle = m_rawData.GetPoint(0)
+        m_points.InsertNextPoint(m_rawStart)
+
+        m_startDirection = [m_rawStartMiddle[i] - m_rawStart[i] for i in xrange(3)]
+        m_startLength = math.sqrt(sum([m_startDirection[i]**2 for i in xrange(3)]))
+        m_startNumOfIntervals = int(m_startLength/0.3)
+        for i in xrange(m_startNumOfIntervals):
+            m_rawStart = [m_rawStart[j] + m_startDirection[j] / m_startNumOfIntervals for j in xrange(3)]
+            m_points.InsertNextPoint(m_rawStart)
+
+        for i in xrange(m_rawData.GetNumberOfPoints() - 2):
+            m_points.InsertNextPoint(m_rawData.GetPoint(i))
+
+        m_rawEnd = m_rawData.GetPoint(m_rawData.GetNumberOfPoints() - 1)
+        m_rawEndMiddle = m_rawData.GetPoint(m_rawData.GetNumberOfPoints() - 3)
+        m_endDirection = [m_rawEnd[i] - m_rawEndMiddle[i] for i in xrange(3)]
+        m_endLength = math.sqrt(sum([m_endDirection[i]**2 for i in xrange(3)]))
+        m_endNumOfIntervals = int(m_endLength/0.3)
+        for i in xrange(m_endNumOfIntervals):
+            m_rawEndMiddle = [m_rawEndMiddle[j] + m_endDirection[j] / m_endNumOfIntervals for j in xrange(3)]
+            m_points.InsertNextPoint(m_rawEndMiddle)
+
+        m_data = vtk.vtkPolyData()
+        m_data.SetPoints(m_points)
+
+
         self._reader = m_reader
         self._renderer.AddActor(m_actor)
-        self._data = m_reader.GetOutput()
+        self._rawData = m_rawData
+        self._data = m_data
         self._IS_READ_FLAG=True
         pass
 
@@ -121,7 +152,10 @@ class CenterLineHandler(vtk.vtkPolyData):
         """
         m_intevals = []
         m_loopValue = 0
-        for i in xrange(m_startPadding+1, self._data.GetNumberOfPoints() - m_endPadding):
+        m_startPadding  = int(m_startPadding/.3)
+        m_endPadding = int(m_endPadding/.3)
+        m_intevals.append(m_startPadding+1)
+        for i in xrange(m_startPadding+1, self._data.GetNumberOfPoints() - 1 - m_endPadding):
             m_loopValue += self.GetDistance(i, i-1)
             if m_loopValue > m_distance:
                 m_intevals.append(i)
@@ -160,7 +194,7 @@ class CenterLineHandler(vtk.vtkPolyData):
         m_indexlist = [m_pointID + i for i in xrange(-range, range+1, step)]
         m_preAverage = [0,0,0]
         for i in m_indexlist:
-            l_n = [self._data.GetPoint(i)[k] - self._data.GetPoint(i - 1)[k] for k in xrange(3)]
+            l_n = [self._data.GetPoint(i % self._data.GetNumberOfPoints())[k] - self._data.GetPoint((i - 1) % self._data.GetNumberOfPoints())[k] for k in xrange(3)]
             l_magnitude = math.sqrt(sum([l_n[k]**2 for k in xrange(3)]))
             m_preAverage = [m_preAverage[k] + l_n[k]/l_magnitude for k in xrange(3)]
         m_preAverage = [m_preAverage[k]*step/float(2*range+1) for k in xrange(3)]
@@ -195,7 +229,7 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
         this into the class constructor so that it is read automatically.
         :return:
         """
-        if self.filename.split('.')[-1] == "vtp":
+        if self.filename.split('.')[-1] == "vtp" or self.filename.split('.')[-1] == "vtk":
             m_reader = vtk.vtkXMLPolyDataReader()
         elif self.filename.split('.')[-1] == "stl":
             m_reader = vtk.vtkSTLReader()
@@ -286,13 +320,13 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
         for i in xrange(1 + m_startPadding, self._centerLine._data.GetNumberOfPoints() - m_endPadding):
             m_totalDistance += self._centerLine.GetDistance(i, i-1)
 
-        m_sliceSpacing = m_totalDistance/(1. + m_numberOfSlice)
+        m_sliceSpacing = (m_totalDistance - m_startPadding - m_endPadding)*0.98/(m_numberOfSlice)
         m_intervalIndexes = self._centerLine.GetEqualDistanceIntervalsIndex(m_sliceSpacing, m_startPadding, m_endPadding)
         self._centerLineIntervals = m_intervalIndexes
 
         m_tangents = []
         for k in xrange(len(m_intervalIndexes)):
-            m_tmp = self._centerLine.GetNormalizedTangent(m_intervalIndexes[k], range=30, step=3)
+            m_tmp = self._centerLine.GetNormalizedTangent(m_intervalIndexes[k], range=12, step=3)
             m_tangents.append(m_tmp)
 
         m_average = [sum([m_tangents[i][j] for i in xrange(3)])/float(len(m_tangents)) for j in xrange(3)]

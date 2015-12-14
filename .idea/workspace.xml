@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="54907709-85a8-4693-898c-a5895e9771a2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+    <list default="true" id="54907709-85a8-4693-898c-a5895e9771a2" name="Default" comment="Fix VTK Version &lt; =5.10 compatibility">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Data/growSleeve.stl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Data/growSleeve.vtp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HoleDriller.py" afterPath="$PROJECT_DIR$/HoleDriller.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyDataHandler.py" afterPath="$PROJECT_DIR$/PolyDataHandler.py" />
     </list>
     <ignored path="vtkHoleDitrubution.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -20,8 +22,8 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/vtkHoleDitrubution$main__1_.coverage" NAME="main quiet  Coverage Results" MODIFIED="1449628116667" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/vtkHoleDitrubution$main.coverage" NAME="main Coverage Results" MODIFIED="1449458628822" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/vtkHoleDitrubution$main_.coverage" NAME="main  Coverage Results" MODIFIED="1449717426710" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/vtkHoleDitrubution$PolyDataHandler.coverage" NAME="PolyDataHandler Coverage Results" MODIFIED="1449641000821" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/vtkHoleDitrubution$main_.coverage" NAME="main  Coverage Results" MODIFIED="1450081934660" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/vtkHoleDitrubution$PolyDataHandler.coverage" NAME="PolyDataHandler Coverage Results" MODIFIED="1449817946019" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -44,11 +46,21 @@
           <file leaf-file-name="HoleDriller.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/HoleDriller.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="1.141925">
-                  <caret line="43" column="41" selection-start-line="43" selection-start-column="41" selection-end-line="43" selection-end-column="41" />
+                <state vertical-scroll-proportion="0.6494845">
+                  <caret line="28" column="37" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
                   <folding>
                     <element signature="e#76#140#0" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="growSleeve.stl" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Data/growSleeve.stl">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -60,41 +72,37 @@
           <file leaf-file-name="PolyDataHandler.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/PolyDataHandler.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="1.0790378">
-                  <caret line="285" column="16" selection-start-line="285" selection-start-column="14" selection-end-line="285" selection-end-column="16" />
+                <state vertical-scroll-proportion="0.94127244">
+                  <caret line="322" column="73" selection-start-line="322" selection-start-column="73" selection-end-line="322" selection-end-column="73" />
                   <folding>
                     <element signature="e#18#74#1" expanded="false" />
-                    <element signature="e#195#445#0" expanded="false" />
-                    <element signature="e#475#1180#0" expanded="false" />
                     <element signature="e#475#673#1" expanded="false" />
-                    <element signature="e#1220#1613#0" expanded="false" />
-                    <element signature="e#1220#1301#1" expanded="false" />
-                    <element signature="e#1703#2964#0" expanded="false" />
-                    <element signature="e#1703#1995#1" expanded="false" />
-                    <element signature="e#2997#3138#0" expanded="false" />
-                    <element signature="e#2997#3112#1" expanded="false" />
-                    <element signature="e#3187#3638#0" expanded="false" />
-                    <element signature="e#3187#3481#1" expanded="false" />
-                    <element signature="e#3740#4345#0" expanded="false" />
-                    <element signature="e#3740#4019#1" expanded="false" />
-                    <element signature="e#4382#4650#0" expanded="false" />
-                    <element signature="e#4382#4475#1" expanded="false" />
-                    <element signature="e#4686#4996#0" expanded="false" />
-                    <element signature="e#4686#4779#1" expanded="false" />
-                    <element signature="e#5070#5564#0" expanded="false" />
-                    <element signature="e#5605#5638#0" expanded="false" />
-                    <element signature="e#5736#6215#0" expanded="false" />
-                    <element signature="e#5736#5918#1" expanded="false" />
-                    <element signature="e#6247#6272#0" expanded="false" />
-                    <element signature="e#6302#7103#0" expanded="false" />
-                    <element signature="e#6302#6500#1" expanded="false" />
-                    <element signature="e#7144#7177#0" expanded="false" />
-                    <element signature="e#7257#8451#0" expanded="false" />
-                    <element signature="e#8511#9013#0" expanded="false" />
-                    <element signature="e#8511#8635#1" expanded="false" />
-                    <element signature="e#13334#14595#0" expanded="false" />
-                    <element signature="e#13334#13626#1" expanded="false" />
-                    <element signature="e#14673#15456#0" expanded="false" />
+                    <element signature="e#2719#3112#0" expanded="false" />
+                    <element signature="e#2719#2800#1" expanded="false" />
+                    <element signature="e#3202#4463#0" expanded="false" />
+                    <element signature="e#3202#3494#1" expanded="false" />
+                    <element signature="e#4496#4637#0" expanded="false" />
+                    <element signature="e#4496#4611#1" expanded="false" />
+                    <element signature="e#4686#4980#1" expanded="false" />
+                    <element signature="e#6022#6290#0" expanded="false" />
+                    <element signature="e#6022#6115#1" expanded="false" />
+                    <element signature="e#6326#6636#0" expanded="false" />
+                    <element signature="e#6326#6419#1" expanded="false" />
+                    <element signature="e#7313#7346#0" expanded="false" />
+                    <element signature="e#7444#7923#0" expanded="false" />
+                    <element signature="e#7444#7626#1" expanded="false" />
+                    <element signature="e#7955#7980#0" expanded="false" />
+                    <element signature="e#8010#8852#0" expanded="false" />
+                    <element signature="e#8010#8208#1" expanded="false" />
+                    <element signature="e#8893#8926#0" expanded="false" />
+                    <element signature="e#9006#10200#0" expanded="false" />
+                    <element signature="e#9006#9497#1" expanded="false" />
+                    <element signature="e#10260#10762#0" expanded="false" />
+                    <element signature="e#10260#10384#1" expanded="false" />
+                    <element signature="e#10899#11536#1" expanded="false" />
+                    <element signature="e#15117#16378#0" expanded="false" />
+                    <element signature="e#15117#15409#1" expanded="false" />
+                    <element signature="e#16456#17239#0" expanded="false" />
                   </folding>
                 </state>
               </provider>
@@ -123,8 +131,8 @@
         <option value="$PROJECT_DIR$/CenterLine.py" />
         <option value="$PROJECT_DIR$/ArmSurface.py" />
         <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/PolyDataHandler.py" />
         <option value="$PROJECT_DIR$/HoleDriller.py" />
+        <option value="$PROJECT_DIR$/PolyDataHandler.py" />
       </list>
     </option>
   </component>
@@ -164,8 +172,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -200,6 +206,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -215,6 +223,9 @@
     <property name="SearchEverywhereHistoryKey" value="InputData&#9;null&#9;null" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Data" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Dump" />
       <recent name="$PROJECT_DIR$" />
@@ -464,7 +475,7 @@
       <module name="vtkHoleDistrubution" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/HoleDriller.py" />
-      <option name="PARAMETERS" value="-s ./Data/clipped_surface.stl -c ./Data/centerline.vtp -m 10 -n 8 -r 4 -e 5 -p 20,20" />
+      <option name="PARAMETERS" value="-s ./Data/Flare.stl -c ./Data/Centerline_extended.vtp -m 8 -n 5 -r 3 -e 5" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
@@ -515,7 +526,13 @@
       <option name="project" value="LOCAL" />
       <updated>1449642451376</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Fix VTK Version &lt; =5.10 compatibility">
+      <created>1449717502877</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1449717502877</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -527,22 +544,22 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17247097" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14814815" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946378" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14814815" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15478165" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39937434" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295099" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32012513" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31491137" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295099" sideWeight="0.50193477" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3295099" sideWeight="0.49806523" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295099" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -582,14 +599,15 @@
     <MESSAGE value="Add author tags&#10;" />
     <MESSAGE value="Fully functional release" />
     <MESSAGE value="Fix padding &#10;Fix offset due to error tolerance" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix padding &#10;Fix offset due to error tolerance" />
+    <MESSAGE value="Fix VTK Version &lt; =5.10 compatibility" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix VTK Version &lt; =5.10 compatibility" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint type="python-line">
           <url>file://$PROJECT_DIR$/PolyDataHandler.py</url>
-          <line>46</line>
+          <line>77</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
@@ -598,24 +616,19 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/PolyDataHandler.py</url>
-          <line>303</line>
+          <line>337</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/PolyDataHandler.py</url>
-          <line>99</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/PolyDataHandler.py</url>
-          <line>13</line>
-          <option name="timeStamp" value="16" />
+          <line>162</line>
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="19" />
+      <option name="time" value="24" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -624,6 +637,210 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/HoleDriller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="87" selection-start-line="38" selection-start-column="87" selection-end-line="38" selection-end-column="87" />
+          <folding>
+            <element signature="e#76#140#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Data/growSleeve.stl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PolyDataHandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#18#74#1" expanded="false" />
+            <element signature="e#475#673#1" expanded="false" />
+            <element signature="e#2719#3112#0" expanded="false" />
+            <element signature="e#2719#2800#1" expanded="false" />
+            <element signature="e#3202#4463#0" expanded="false" />
+            <element signature="e#3202#3494#1" expanded="false" />
+            <element signature="e#4496#4637#0" expanded="false" />
+            <element signature="e#4496#4611#1" expanded="false" />
+            <element signature="e#4686#4980#1" expanded="false" />
+            <element signature="e#6022#6290#0" expanded="false" />
+            <element signature="e#6022#6115#1" expanded="false" />
+            <element signature="e#6326#6636#0" expanded="false" />
+            <element signature="e#6326#6419#1" expanded="false" />
+            <element signature="e#7313#7346#0" expanded="false" />
+            <element signature="e#7444#7923#0" expanded="false" />
+            <element signature="e#7444#7626#1" expanded="false" />
+            <element signature="e#7955#7980#0" expanded="false" />
+            <element signature="e#8010#8852#0" expanded="false" />
+            <element signature="e#8010#8208#1" expanded="false" />
+            <element signature="e#8893#8926#0" expanded="false" />
+            <element signature="e#9006#10200#0" expanded="false" />
+            <element signature="e#9006#9497#1" expanded="false" />
+            <element signature="e#10260#10762#0" expanded="false" />
+            <element signature="e#10260#10384#1" expanded="false" />
+            <element signature="e#10899#11536#1" expanded="false" />
+            <element signature="e#15117#16378#0" expanded="false" />
+            <element signature="e#15117#15409#1" expanded="false" />
+            <element signature="e#16456#17239#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HoleDriller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="26" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
+          <folding>
+            <element signature="e#76#140#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Data/growSleeve.stl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PolyDataHandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#18#74#1" expanded="false" />
+            <element signature="e#475#673#1" expanded="false" />
+            <element signature="e#2719#3112#0" expanded="false" />
+            <element signature="e#2719#2800#1" expanded="false" />
+            <element signature="e#3202#4463#0" expanded="false" />
+            <element signature="e#3202#3494#1" expanded="false" />
+            <element signature="e#4496#4637#0" expanded="false" />
+            <element signature="e#4496#4611#1" expanded="false" />
+            <element signature="e#4686#4980#1" expanded="false" />
+            <element signature="e#6022#6290#0" expanded="false" />
+            <element signature="e#6022#6115#1" expanded="false" />
+            <element signature="e#6326#6636#0" expanded="false" />
+            <element signature="e#6326#6419#1" expanded="false" />
+            <element signature="e#7313#7346#0" expanded="false" />
+            <element signature="e#7444#7923#0" expanded="false" />
+            <element signature="e#7444#7626#1" expanded="false" />
+            <element signature="e#7955#7980#0" expanded="false" />
+            <element signature="e#8010#8852#0" expanded="false" />
+            <element signature="e#8010#8208#1" expanded="false" />
+            <element signature="e#8893#8926#0" expanded="false" />
+            <element signature="e#9006#10200#0" expanded="false" />
+            <element signature="e#9006#9497#1" expanded="false" />
+            <element signature="e#10260#10762#0" expanded="false" />
+            <element signature="e#10260#10384#1" expanded="false" />
+            <element signature="e#10899#11536#1" expanded="false" />
+            <element signature="e#15117#16378#0" expanded="false" />
+            <element signature="e#15117#15409#1" expanded="false" />
+            <element signature="e#16456#17239#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HoleDriller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="48" selection-start-line="34" selection-start-column="48" selection-end-line="34" selection-end-column="48" />
+          <folding>
+            <element signature="e#76#140#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PolyDataHandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#18#74#1" expanded="false" />
+            <element signature="e#475#673#1" expanded="false" />
+            <element signature="e#2719#3112#0" expanded="false" />
+            <element signature="e#2719#2800#1" expanded="false" />
+            <element signature="e#3202#4463#0" expanded="false" />
+            <element signature="e#3202#3494#1" expanded="false" />
+            <element signature="e#4496#4637#0" expanded="false" />
+            <element signature="e#4496#4611#1" expanded="false" />
+            <element signature="e#4686#4980#1" expanded="false" />
+            <element signature="e#6022#6290#0" expanded="false" />
+            <element signature="e#6022#6115#1" expanded="false" />
+            <element signature="e#6326#6636#0" expanded="false" />
+            <element signature="e#6326#6419#1" expanded="false" />
+            <element signature="e#7313#7346#0" expanded="false" />
+            <element signature="e#7444#7923#0" expanded="false" />
+            <element signature="e#7444#7626#1" expanded="false" />
+            <element signature="e#7955#7980#0" expanded="false" />
+            <element signature="e#8010#8852#0" expanded="false" />
+            <element signature="e#8010#8208#1" expanded="false" />
+            <element signature="e#8893#8926#0" expanded="false" />
+            <element signature="e#9006#10200#0" expanded="false" />
+            <element signature="e#9006#9497#1" expanded="false" />
+            <element signature="e#10260#10762#0" expanded="false" />
+            <element signature="e#10260#10384#1" expanded="false" />
+            <element signature="e#10899#11536#1" expanded="false" />
+            <element signature="e#15117#16378#0" expanded="false" />
+            <element signature="e#15117#15409#1" expanded="false" />
+            <element signature="e#16456#17239#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HoleDriller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="48" selection-start-line="34" selection-start-column="48" selection-end-line="34" selection-end-column="48" />
+          <folding>
+            <element signature="e#76#140#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PolyDataHandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#18#74#1" expanded="false" />
+            <element signature="e#475#673#1" expanded="false" />
+            <element signature="e#2719#3112#0" expanded="false" />
+            <element signature="e#2719#2800#1" expanded="false" />
+            <element signature="e#3202#4463#0" expanded="false" />
+            <element signature="e#3202#3494#1" expanded="false" />
+            <element signature="e#4496#4637#0" expanded="false" />
+            <element signature="e#4496#4611#1" expanded="false" />
+            <element signature="e#4686#4980#1" expanded="false" />
+            <element signature="e#6022#6290#0" expanded="false" />
+            <element signature="e#6022#6115#1" expanded="false" />
+            <element signature="e#6326#6636#0" expanded="false" />
+            <element signature="e#6326#6419#1" expanded="false" />
+            <element signature="e#7313#7346#0" expanded="false" />
+            <element signature="e#7444#7923#0" expanded="false" />
+            <element signature="e#7444#7626#1" expanded="false" />
+            <element signature="e#7955#7980#0" expanded="false" />
+            <element signature="e#8010#8852#0" expanded="false" />
+            <element signature="e#8010#8208#1" expanded="false" />
+            <element signature="e#8893#8926#0" expanded="false" />
+            <element signature="e#9006#10200#0" expanded="false" />
+            <element signature="e#9006#9497#1" expanded="false" />
+            <element signature="e#10260#10762#0" expanded="false" />
+            <element signature="e#10260#10384#1" expanded="false" />
+            <element signature="e#10899#11536#1" expanded="false" />
+            <element signature="e#15117#16378#0" expanded="false" />
+            <element signature="e#15117#15409#1" expanded="false" />
+            <element signature="e#16456#17239#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/HoleDriller.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -640,37 +857,33 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#18#74#1" expanded="false" />
-            <element signature="e#195#445#0" expanded="false" />
-            <element signature="e#475#1180#0" expanded="false" />
             <element signature="e#475#673#1" expanded="false" />
-            <element signature="e#1220#1613#0" expanded="false" />
-            <element signature="e#1220#1301#1" expanded="false" />
-            <element signature="e#1703#2964#0" expanded="false" />
-            <element signature="e#1703#1995#1" expanded="false" />
-            <element signature="e#2997#3138#0" expanded="false" />
-            <element signature="e#2997#3112#1" expanded="false" />
-            <element signature="e#3187#3638#0" expanded="false" />
-            <element signature="e#3187#3481#1" expanded="false" />
-            <element signature="e#3740#4345#0" expanded="false" />
-            <element signature="e#3740#4019#1" expanded="false" />
-            <element signature="e#4382#4650#0" expanded="false" />
-            <element signature="e#4382#4475#1" expanded="false" />
-            <element signature="e#4686#4996#0" expanded="false" />
-            <element signature="e#4686#4779#1" expanded="false" />
-            <element signature="e#5070#5564#0" expanded="false" />
-            <element signature="e#5605#5638#0" expanded="false" />
-            <element signature="e#5736#6215#0" expanded="false" />
-            <element signature="e#5736#5918#1" expanded="false" />
-            <element signature="e#6247#6272#0" expanded="false" />
-            <element signature="e#6302#7103#0" expanded="false" />
-            <element signature="e#6302#6500#1" expanded="false" />
-            <element signature="e#7144#7177#0" expanded="false" />
-            <element signature="e#7257#8451#0" expanded="false" />
-            <element signature="e#8511#9013#0" expanded="false" />
-            <element signature="e#8511#8635#1" expanded="false" />
-            <element signature="e#13334#14595#0" expanded="false" />
-            <element signature="e#13334#13626#1" expanded="false" />
-            <element signature="e#14673#15456#0" expanded="false" />
+            <element signature="e#2719#3112#0" expanded="false" />
+            <element signature="e#2719#2800#1" expanded="false" />
+            <element signature="e#3202#4463#0" expanded="false" />
+            <element signature="e#3202#3494#1" expanded="false" />
+            <element signature="e#4496#4637#0" expanded="false" />
+            <element signature="e#4496#4611#1" expanded="false" />
+            <element signature="e#4686#4980#1" expanded="false" />
+            <element signature="e#6022#6290#0" expanded="false" />
+            <element signature="e#6022#6115#1" expanded="false" />
+            <element signature="e#6326#6636#0" expanded="false" />
+            <element signature="e#6326#6419#1" expanded="false" />
+            <element signature="e#7313#7346#0" expanded="false" />
+            <element signature="e#7444#7923#0" expanded="false" />
+            <element signature="e#7444#7626#1" expanded="false" />
+            <element signature="e#7955#7980#0" expanded="false" />
+            <element signature="e#8010#8852#0" expanded="false" />
+            <element signature="e#8010#8208#1" expanded="false" />
+            <element signature="e#8893#8926#0" expanded="false" />
+            <element signature="e#9006#10200#0" expanded="false" />
+            <element signature="e#9006#9497#1" expanded="false" />
+            <element signature="e#10260#10762#0" expanded="false" />
+            <element signature="e#10260#10384#1" expanded="false" />
+            <element signature="e#10899#11536#1" expanded="false" />
+            <element signature="e#15117#16378#0" expanded="false" />
+            <element signature="e#15117#15409#1" expanded="false" />
+            <element signature="e#16456#17239#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -679,15 +892,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/drilled.stl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -695,57 +899,60 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3326157">
           <caret line="81" column="8" selection-start-line="81" selection-start-column="8" selection-end-line="81" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PolyDataHandler.py">
+    <entry file="file://$PROJECT_DIR$/Data/growSleeve.stl">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0790378">
-          <caret line="285" column="16" selection-start-line="285" selection-start-column="14" selection-end-line="285" selection-end-column="16" />
-          <folding>
-            <element signature="e#18#74#1" expanded="false" />
-            <element signature="e#195#445#0" expanded="false" />
-            <element signature="e#475#1180#0" expanded="false" />
-            <element signature="e#475#673#1" expanded="false" />
-            <element signature="e#1220#1613#0" expanded="false" />
-            <element signature="e#1220#1301#1" expanded="false" />
-            <element signature="e#1703#2964#0" expanded="false" />
-            <element signature="e#1703#1995#1" expanded="false" />
-            <element signature="e#2997#3138#0" expanded="false" />
-            <element signature="e#2997#3112#1" expanded="false" />
-            <element signature="e#3187#3638#0" expanded="false" />
-            <element signature="e#3187#3481#1" expanded="false" />
-            <element signature="e#3740#4345#0" expanded="false" />
-            <element signature="e#3740#4019#1" expanded="false" />
-            <element signature="e#4382#4650#0" expanded="false" />
-            <element signature="e#4382#4475#1" expanded="false" />
-            <element signature="e#4686#4996#0" expanded="false" />
-            <element signature="e#4686#4779#1" expanded="false" />
-            <element signature="e#5070#5564#0" expanded="false" />
-            <element signature="e#5605#5638#0" expanded="false" />
-            <element signature="e#5736#6215#0" expanded="false" />
-            <element signature="e#5736#5918#1" expanded="false" />
-            <element signature="e#6247#6272#0" expanded="false" />
-            <element signature="e#6302#7103#0" expanded="false" />
-            <element signature="e#6302#6500#1" expanded="false" />
-            <element signature="e#7144#7177#0" expanded="false" />
-            <element signature="e#7257#8451#0" expanded="false" />
-            <element signature="e#8511#9013#0" expanded="false" />
-            <element signature="e#8511#8635#1" expanded="false" />
-            <element signature="e#13334#14595#0" expanded="false" />
-            <element signature="e#13334#13626#1" expanded="false" />
-            <element signature="e#14673#15456#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/HoleDriller.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.141925">
-          <caret line="43" column="41" selection-start-line="43" selection-start-column="41" selection-end-line="43" selection-end-column="41" />
+        <state vertical-scroll-proportion="0.6494845">
+          <caret line="28" column="37" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
           <folding>
             <element signature="e#76#140#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PolyDataHandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.94127244">
+          <caret line="322" column="73" selection-start-line="322" selection-start-column="73" selection-end-line="322" selection-end-column="73" />
+          <folding>
+            <element signature="e#18#74#1" expanded="false" />
+            <element signature="e#475#673#1" expanded="false" />
+            <element signature="e#2719#3112#0" expanded="false" />
+            <element signature="e#2719#2800#1" expanded="false" />
+            <element signature="e#3202#4463#0" expanded="false" />
+            <element signature="e#3202#3494#1" expanded="false" />
+            <element signature="e#4496#4637#0" expanded="false" />
+            <element signature="e#4496#4611#1" expanded="false" />
+            <element signature="e#4686#4980#1" expanded="false" />
+            <element signature="e#6022#6290#0" expanded="false" />
+            <element signature="e#6022#6115#1" expanded="false" />
+            <element signature="e#6326#6636#0" expanded="false" />
+            <element signature="e#6326#6419#1" expanded="false" />
+            <element signature="e#7313#7346#0" expanded="false" />
+            <element signature="e#7444#7923#0" expanded="false" />
+            <element signature="e#7444#7626#1" expanded="false" />
+            <element signature="e#7955#7980#0" expanded="false" />
+            <element signature="e#8010#8852#0" expanded="false" />
+            <element signature="e#8010#8208#1" expanded="false" />
+            <element signature="e#8893#8926#0" expanded="false" />
+            <element signature="e#9006#10200#0" expanded="false" />
+            <element signature="e#9006#9497#1" expanded="false" />
+            <element signature="e#10260#10762#0" expanded="false" />
+            <element signature="e#10260#10384#1" expanded="false" />
+            <element signature="e#10899#11536#1" expanded="false" />
+            <element signature="e#15117#16378#0" expanded="false" />
+            <element signature="e#15117#15409#1" expanded="false" />
+            <element signature="e#16456#17239#0" expanded="false" />
           </folding>
         </state>
       </provider>
