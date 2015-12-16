@@ -28,6 +28,7 @@ def main(args):
     parser.add_option("-r", "--radius", action="store", dest="radius", type=float, default=5, help="Set hole radius required")
     parser.add_option("-p", "--padding", action="store", dest="padding", type=str, default="20,10", help="Set padding level where no holes are drilled")
     parser.add_option("-e", "--errorTorlerance", action="store", dest="error", type=float, default=1, help="Set maximum error tolerance from idea grid in degrees")
+    parser.add_option("-d", "--noDrillCoord", action="store", dest="omitted", default=None, help="Set the coordinates of no-drill area")
     parser.add_option("-a", "--auto", action="store_true", dest="auto", default=False, help="Automatically determine parameters")
 
     (options, args) = parser.parse_args()
@@ -38,9 +39,17 @@ def main(args):
 
     try:
         if not os.path.isfile(surfaceFileName):
+            if not options.quiet:
+                print "[Error] Surface file %s dosen't exist!"%surfaceFileName
             raise IOError("Surface file %s dosen't exist!"%surfaceFileName)
         if not os.path.isfile(centerlineFileName):
+            if not options.quiet:
+                print "[Error] Centerline file %s dosen't exist exist!"%centerlineFileName
             raise IOError("Centerline file %s dosen't exist!"%centerlineFileName)
+        if type(options.omitted) != None or type(options.omitted != str):
+            raise TypeError("Omit dril coordinates should be specified with strings")
+
+
 
         # create center line object
         cl = CenterLineHandler(centerlineFileName)
@@ -64,12 +73,20 @@ def main(args):
         writer.SetFileName(outFileName)
         writer.SetInputData(arm._data)
         if writer.Write() == 1:
+            if not options.quiet:
+                print "[Error] Write failed..."
             return 1
         else:
+            if not options.quiet:
+                print "Successful. File written to %s"%(options.outFileName)
             return 0
     except IOError:
+        if not options.quiet:
+            print "[Error] File IO error, please check file format and file directory."
         return 2
     except RuntimeError:
+        if not options.quiet:
+            print "[Error] Current error tolerence setting is to low to produce anything."
         return 3
 
 if __name__ == '__main__':
