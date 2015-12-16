@@ -140,6 +140,38 @@ class CenterLineHandler(vtk.vtkPolyData):
         """
         return self._data
 
+    def GetPointActor(self, m_ptId, m_radius=1, m_color=[0.5,0.5,0]):
+        """
+        Get a sphere source actor at the specified point. For Debug
+
+        :param m_color:     [list]  RGB of the actor
+        :param m_radius:    [float] Radius of the actor
+        :param m_ptId:      [int]   vtkID
+        :return:
+        """
+        m_ptCoord = self.GetPoint(m_ptId)
+        m_sphere = vtk.vtkSphereSource()
+        m_sphere.SetCenter(m_ptCoord)
+        m_sphere.SetRadius(m_radius)
+
+        m_sphereMapper = vtk.vtkPolyDataMapper()
+        m_sphereMapper.SetInputConnection(m_sphere.GetOutputPort())
+        m_sphereMapper.Update()
+
+        m_actor = vtk.vtkActor()
+        m_actor.SetMapper(m_sphereMapper)
+        m_actor.GetProperty().SetColor(m_color)
+
+        return m_actor
+
+    def GetPoint(self, m_ptId):
+        """
+        Return coordinate of the point.
+        :param m_ptId:
+        :return:
+        """
+        return self._data.GetPoint(m_ptId)
+
     def GetDistance(self, int1, int2):
         """
         Return the distance between two points of the data set, specified by its ID
@@ -216,7 +248,7 @@ class CenterLineHandler(vtk.vtkPolyData):
         return self._data.GetPoint(m_int)
 
 class ArmSurfaceHandler(vtk.vtkPolyData):
-    def __init__(self, filename, centerline):
+    def __init__(self, filename, centerline, openingMarker):
         """
         Create an ArmSurface object
 
@@ -231,6 +263,7 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
         self._renderWindowInteractor = vtk.vtkRenderWindowInteractor()
         self._IS_READ_FLAG=False
         self._centerLine = centerline
+        self._openingMarker = openingMarker
 
     def IsRead(self):
         return self._IS_READ_FLAG
@@ -318,7 +351,7 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
         m_vtkpoints = m_cutter.GetOutput().GetPoints()
         return m_vtkpoints
 
-    def GetSemiUniDistnaceGrid(self, m_holePerSlice, m_numberOfSlice, m_errorTolerance=1, m_startPadding = 0, m_endPadding=0):
+    def GetSemiUniDistnaceGrid(self, m_holePerSlice, m_numberOfSlice, m_errorTolerance=1, m_startPadding = 0, m_endPadding=0, m_bufferDeg=10):
         """
         Obtain a set of coordinates roughly equal to a projection of periodic square grid vertex on the arm
         surface.
@@ -353,10 +386,19 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
         m_holeList = []
         m_alphaNormal = None
         m_masterPt = self._centerLine.GetPoint(m_intervalIndexes[0])
+        if m_bufferDeg != None and self._openingMarker != None:
+            m_kdtree = vtk.vtkKdTree()
+            m_kdtree.SetDataSet(self._centerLine._data)
+            m_kdtree.BuildLocator()
+
+            self.SliceSurface()
+
+        # Drill along intervals
         for i in xrange(len(m_intervalIndexes)):
             l_sliceCenter = self._centerLine.GetPoint(m_intervalIndexes[i])
             l_slice = self.SliceSurface(l_sliceCenter, m_average)
             if i == 0:
+
                 # Define the starting vector for all slice
                 l_ringAlphaPt = l_slice.GetPoint(i)
                 l_ringAlphaVect = [l_ringAlphaPt[j] - l_sliceCenter[j] for j in xrange(3)]
@@ -369,8 +411,8 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
                 if math.fabs(vtkmath.Dot(l_ringSliceMasterVect, m_alphaNormal)) < 10 and vtkmath.Dot(l_ringSliceAlphaVect, l_ringAlphaVect) > 0:
                     break
 
-            l_uniformSectionDegree = 360./m_holePerSlice
-            l_sectionDegree = 360./m_holePerSlice
+            l_uniformSectionDegree = (360. - m_bufferDeg)/m_holePerSlice
+            l_sectionDegree = (360. - m_bufferDeg)/m_holePerSlice
             l_loopbreak = 0
             l_holeList = [[l_ringSliceAlphaVect[k] + l_sliceCenter[k] for k in xrange(3) ]]
             while(len(l_holeList) < m_holePerSlice):
@@ -391,6 +433,32 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
             m_holeList.extend(l_holeList)
 
         return m_holeList
+
+    def GetPointActor(self, m_ptId, m_radius=1, m_color=[0.5,0.5,0]):
+        """
+        Get a sphere source actor at the specified point. For Debug
+
+        :param m_color:     [list]  RGB of the actor
+        :param m_radius:    [float] Radius of the actor
+        :param m_ptId:      [int]   vtkID
+        :return:
+        """
+        m_ptCoord = self.GetPoint(m_ptId)
+        m_sphere = vtk.vtkSphereSource()
+        m_sphere.SetCenter(m_ptCoord)
+        m_sphere.SetRadius(m_radius)
+
+        m_sphereMapper = vtk.vtkPolyDataMapper()
+        m_sphereMapper.SetInputConnection(m_sphere.GetOutputPort())
+        m_sphereMapper.Update()
+
+        m_actor = vtk.vtkActor()
+        m_actor.SetMapper(m_sphereMapper)
+        m_actor.GetProperty().SetColor(m_color)
+
+        return m_actor
+
+
 
     def WriteImage(self, m_outFileName="./Dump/tmp.png",m_dimension=[400,400]):
         """
