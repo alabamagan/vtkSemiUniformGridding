@@ -3,10 +3,10 @@
 Author: Wong Matthew Lun
 Date: 2015-12-08 6:21PM
 
-Return error list:
+Return exit code  list:
 0   Success
 1   Most likely Write Failed
-2   Cannot find surface/centerline files
+2   Cannot find surface/centerline files *OR* format of the input file is not correct
 3   Error tolerance errors, please set larger error tolerance
 
 """
@@ -73,7 +73,8 @@ def main(args):
         return 3
 
 if __name__ == '__main__':
-    main(sys.argv)
+    exitCode = main(sys.argv)
+    exit(exitCode)
 
 
 
