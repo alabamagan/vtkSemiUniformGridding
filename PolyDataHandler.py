@@ -262,8 +262,12 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
         self._renderWindow = vtk.vtkRenderWindow()
         self._renderWindowInteractor = vtk.vtkRenderWindowInteractor()
         self._IS_READ_FLAG=False
-        self._centerLine = centerline
         self._openingMarker = openingMarker
+
+        # Read Centerline if it is not read before assignment
+        centerline.Read()
+        self._centerLine = centerline
+
 
     def IsRead(self):
         return self._IS_READ_FLAG
@@ -322,8 +326,8 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
             m_dotProduct = sum([m_ringVector[k] * m_normalVector[k] for k in xrange(3)])
             if math.fabs(m_dotProduct) < m_thickness :
                 m_slicepoints.append(i)
-            # if i%100==0:
-            #     print math.fabs(m_dotProduct)
+                # if i%100==0:
+                #     print math.fabs(m_dotProduct)
         m_vtkslicepoints = vtk.vtkPolyData()
         m_vtkpts = vtk.vtkPoints()
         for i in m_slicepoints:
