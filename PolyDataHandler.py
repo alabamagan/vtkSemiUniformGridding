@@ -263,11 +263,15 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
         self._renderWindowInteractor = vtk.vtkRenderWindowInteractor()
         self._IS_READ_FLAG=False
         self._openingMarker = openingMarker
+        self._bufferAngle = 0
 
         # Read Centerline if it is not read before assignment
         centerline.Read()
         self._centerLine = centerline
 
+    def SetBufferAngle(self, angle):
+        self._bufferAngle = float(angle)
+        pass
 
     def IsRead(self):
         return self._IS_READ_FLAG
@@ -305,6 +309,12 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
         pass
 
     def GetPoint(self, m_int):
+        """
+        Return the coordinate of the vtkId point
+
+        :param m_int:   [int] vtkId
+        :return:
+        """
         return self._data.GetPoint(m_int)
 
     def SliceSurfaceOld(self, m_pt, m_normalVector, m_thickness=0.1):
@@ -355,7 +365,7 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
         m_vtkpoints = m_cutter.GetOutput().GetPoints()
         return m_vtkpoints
 
-    def GetSemiUniDistnaceGrid(self, m_holePerSlice, m_numberOfSlice, m_errorTolerance=1, m_startPadding = 0, m_endPadding=0, m_bufferDeg=10):
+    def GetSemiUniDistnaceGrid(self, m_holePerSlice, m_numberOfSlice, m_errorTolerance=1, m_startPadding = 0, m_endPadding=0, m_bufferDeg=self._bufferAngle):
         """
         Obtain a set of coordinates roughly equal to a projection of periodic square grid vertex on the arm
         surface.
@@ -365,6 +375,7 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
         :param m_errorTolerance:    [float] The maximum allowed deviation of hole coordinate from idea grid
         :param m_startPadding:      [int]   Starting side padding where no holes will be drilled
         :param m_endPadding:        [int]   Ending side padding where no holes will be drilled
+        :param m_bufferDeg:         [float] Angle between planes where buffers zones are in between.
         :return: [list] List of hole coordinates
         """
         vtkmath = vtk.vtkMath()
@@ -387,25 +398,29 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
 
         m_average = [sum([m_tangents[i][j] for i in xrange(3)])/float(len(m_tangents)) for j in xrange(3)]
 
+        m_openingList = []
         m_holeList = []
         m_alphaNormal = None
         m_masterPt = self._centerLine.GetPoint(m_intervalIndexes[0])
+
+        # Define cast opening zone and start drilling zone
         if m_bufferDeg != None and self._openingMarker != None:
-            m_kdtree = vtk.vtkKdTree()
+            m_kdtree = vtk.vtkKdTreePointLocator()
             m_kdtree.SetDataSet(self._centerLine._data)
             m_kdtree.BuildLocator()
+            m_closestCenterlinePointId = m_kdtree.FindClosestPoint(self._openingMarker)
+            m_closestCenterlinePoint = self._centerLine.GetPoint(m_closestCenterlinePointId)
+            m_masterPt = m_closestCenterlinePoint
 
-            self.SliceSurface()
 
         # Drill along intervals
         for i in xrange(len(m_intervalIndexes)):
             l_sliceCenter = self._centerLine.GetPoint(m_intervalIndexes[i])
             l_slice = self.SliceSurface(l_sliceCenter, m_average)
             if i == 0:
-
                 # Define the starting vector for all slice
-                l_ringAlphaPt = l_slice.GetPoint(i)
-                l_ringAlphaVect = [l_ringAlphaPt[j] - l_sliceCenter[j] for j in xrange(3)]
+                # l_ringAlphaPt = l_slice.GetPoint(i)
+                l_ringAlphaVect = [self._openingMarker[j] - m_masterPt[j] for j in xrange(3)]
                 m_alphaNormal = [0,0,0]
                 vtkmath.Cross(m_average, l_ringAlphaVect, m_alphaNormal)
 
@@ -418,8 +433,11 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
             l_uniformSectionDegree = (360. - m_bufferDeg)/m_holePerSlice
             l_sectionDegree = (360. - m_bufferDeg)/m_holePerSlice
             l_loopbreak = 0
-            l_holeList = [[l_ringSliceAlphaVect[k] + l_sliceCenter[k] for k in xrange(3) ]]
-            while(len(l_holeList) < m_holePerSlice):
+            m_openingList.append([l_ringSliceAlphaVect[k] + l_sliceCenter[k] for k in xrange(3)]) # Include first vector
+            l_holeList = []
+            while(len(l_holeList) < m_holePerSlice - 1):
+                if len(l_holeList) == 0:
+                    l_sectionDegree += m_bufferDeg/2
                 for j in xrange(l_slice.GetNumberOfPoints()):
                     l_p1 = [0.,0.,0.]
                     l_ringVect = [l_slice.GetPoint(j)[k] - l_sliceCenter[k] for k in xrange(3)]
@@ -435,7 +453,7 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
                     raise RuntimeError("Current error tolerence setting is to low to produce anything.")
                 l_loopbreak += 1
             m_holeList.extend(l_holeList)
-
+            self._openingList = m_openingList
         return m_holeList
 
     def GetPointActor(self, m_ptId, m_radius=1, m_color=[0.5,0.5,0]):
@@ -461,8 +479,6 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
         m_actor.GetProperty().SetColor(m_color)
 
         return m_actor
-
-
 
     def WriteImage(self, m_outFileName="./Dump/tmp.png",m_dimension=[400,400]):
         """

@@ -29,6 +29,7 @@ def main(args):
     parser.add_option("-p", "--padding", action="store", dest="padding", type=str, default="20,10", help="Set padding level where no holes are drilled")
     parser.add_option("-e", "--errorTorlerance", action="store", dest="error", type=float, default=1, help="Set maximum error tolerance from idea grid in degrees")
     parser.add_option("-d", "--noDrillCoord", action="store", dest="omitted", default=None, help="Set the coordinates of no-drill area")
+    parser.add_option("-b", "--bufferAngle", action="store", dest="bufferAngle", type=float, default=40, help="Buffer angle which decide the buffer area, calculated in degrees")
     parser.add_option("-a", "--auto", action="store_true", dest="auto", default=False, help="Automatically determine parameters")
 
     (options, args) = parser.parse_args()
@@ -46,9 +47,10 @@ def main(args):
             if not options.quiet:
                 print "[Error] Centerline file %s dosen't exist exist!"%centerlineFileName
             raise IOError("Centerline file %s dosen't exist!"%centerlineFileName)
-        if type(options.omitted) != None or type(options.omitted != str):
+        if type(options.omitted) != None and type(options.omitted) != str:
             raise TypeError("Omit dril coordinates should be specified with strings")
-
+        else:
+            openingMarker = [int(options.omitted.split(',')[i]) for i in xrange(3)]
 
 
         # create center line object
@@ -56,11 +58,12 @@ def main(args):
         cl.Read()
 
         # careate arm object
-        arm = ArmSurfaceHandler(surfaceFileName, cl)
+        arm = ArmSurfaceHandler(surfaceFileName, cl, openingMarker)
         arm.Read()
+        arm.SetBufferAngle(options.bufferAngle)
 
         # Get a list of holes and then drill
-        holelist = arm.GetSemiUniDistnaceGrid(options.holesPerSlice, options.numOfSlice - 1, options.error, startPadding, endPadding)
+        holelist = arm.GetSemiUniDistnaceGrid(options.holesPerSlice + 1, options.numOfSlice - 1, options.error, startPadding, endPadding)
         arm.SphereDrill(holelist, options.radius, options.quiet)
 
         clippermapper = vtk.vtkPolyDataMapper()
@@ -72,13 +75,28 @@ def main(args):
         writer = vtk.vtkSTLWriter()
         writer.SetFileName(outFileName)
         writer.SetInputData(arm._data)
-        if writer.Write() == 1:
+
+        points = vtk.vtkPoints()
+        for i in arm._openingList:
+            points.InsertNextPoint(i)
+
+        polyline = vtk.vtkPolyData()
+        polyline.SetPoints(points)
+        polylineWriter = vtk.vtkXMLPolyDataWriter()
+        polylineWriter.SetInputData(polyline)
+        polylineWriter.SetFileName("./tmp.vtp")
+
+        if writer.Write() != 1:
             if not options.quiet:
                 print "[Error] Write failed..."
             return 1
         else:
             if not options.quiet:
                 print "Successful. File written to %s"%(options.outFileName)
+            if polylineWriter.Write() != 1:
+                if not options.quiet:
+                    print "[Error] Opening line write failed"
+                return 1
             return 0
     except IOError:
         if not options.quiet:
