@@ -16,14 +16,22 @@ class CenterLineHandler(vtk.vtkPolyData):
         self._renderWindowInteractor = vtk.vtkRenderWindowInteractor()
         self._IS_READ_FLAG=False
 
-    def Read(self):
+    def Read(self, m_forceRead=False):
         """
         Initial step, should be performed before everything else starts, considering to add
         this into the class constructor so that it is read automatically.
+        This step will also recaclulate the centerline from the input and repopulate regions
+        between the start/end pts and middle segment of the centerline.
         :return:
         """
+        # Skip redundant read if it is already done
+        if self._IS_READ_FLAG and not m_forceRead:
+            return
+
         if self.filename.split('.')[-1] == "vtp":
             m_reader = vtk.vtkXMLPolyDataReader()
+        else:
+            raise IOError("Input file for centerline is of incorrect format")
         m_reader.SetFileName(self.filename)
         m_reader.Update()
 
@@ -43,13 +51,17 @@ class CenterLineHandler(vtk.vtkPolyData):
         m_startDirection = [m_rawStartMiddle[i] - m_rawStart[i] for i in xrange(3)]
         m_startLength = math.sqrt(sum([m_startDirection[i]**2 for i in xrange(3)]))
         m_startNumOfIntervals = int(m_startLength/0.3)
+
+        # Populate start region
         for i in xrange(m_startNumOfIntervals):
             m_rawStart = [m_rawStart[j] + m_startDirection[j] / m_startNumOfIntervals for j in xrange(3)]
             m_points.InsertNextPoint(m_rawStart)
 
+        # Push back nodes in original middle segment
         for i in xrange(m_rawData.GetNumberOfPoints() - 2):
             m_points.InsertNextPoint(m_rawData.GetPoint(i))
 
+        # Populate the ending region
         m_rawEnd = m_rawData.GetPoint(m_rawData.GetNumberOfPoints() - 1)
         m_rawEndMiddle = m_rawData.GetPoint(m_rawData.GetNumberOfPoints() - 3)
         m_endDirection = [m_rawEnd[i] - m_rawEndMiddle[i] for i in xrange(3)]
@@ -223,16 +235,23 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
     def IsRead(self):
         return self._IS_READ_FLAG
 
-    def Read(self):
+    def Read(self, m_forceRead=False):
         """
         Initial step, should be performed before everything else starts, considering to add
         this into the class constructor so that it is read automatically.
         :return:
         """
+
+        # Skip redundant read if it is already done
+        if self._IS_READ_FLAG and not m_forceRead:
+            return
+
         if self.filename.split('.')[-1] == "vtp" or self.filename.split('.')[-1] == "vtk":
             m_reader = vtk.vtkXMLPolyDataReader()
         elif self.filename.split('.')[-1] == "stl":
             m_reader = vtk.vtkSTLReader()
+        else:
+            raise IOError("Input file for arm surface is of incorrect format")
         m_reader.SetFileName(self.filename)
         m_reader.Update()
 
@@ -338,6 +357,7 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
             l_sliceCenter = self._centerLine.GetPoint(m_intervalIndexes[i])
             l_slice = self.SliceSurface(l_sliceCenter, m_average)
             if i == 0:
+                # Define the starting vector for all slice
                 l_ringAlphaPt = l_slice.GetPoint(i)
                 l_ringAlphaVect = [l_ringAlphaPt[j] - l_sliceCenter[j] for j in xrange(3)]
                 m_alphaNormal = [0,0,0]
