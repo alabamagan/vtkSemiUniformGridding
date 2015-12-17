@@ -22,7 +22,8 @@ def main(args):
     parser.add_option("-s", "--surface",action="store", dest="surface", default=True,help="Input surface filename.")
     parser.add_option("-q", "--quiet",action="store_true", dest="quiet", default=False,help="Suppress console outputs")
     parser.add_option("-c", "--centerline",action="store", dest="centerline", default=True,help="Input centerline filename.")
-    parser.add_option("-o", "--output", action="store", dest="outFileName", type=str, default="drilled.stl", help="Set output file name")
+    parser.add_option("-o", "--output", action="store", dest="outFileName", type=str, default="drilled.stl", help="Set output casting surface stl file name")
+    parser.add_option("-O", "--outputOpening", action="store", dest="outOpeningFileName", type=str, default="buff.vtp", help="Set output buffer points vtp file name")
     parser.add_option("-m", "--holesPerSlice", action="store", dest="holesPerSlice", type=int, default=5, help="Set number of holes per slice")
     parser.add_option("-n", "--numOfSlice", action="store", dest="numOfSlice", type=int ,default=5, help="Set number of slices")
     parser.add_option("-r", "--radius", action="store", dest="radius", type=float, default=5, help="Set hole radius required")
@@ -47,6 +48,11 @@ def main(args):
             if not options.quiet:
                 print "[Error] Centerline file %s dosen't exist exist!"%centerlineFileName
             raise IOError("Centerline file %s dosen't exist!"%centerlineFileName)
+        if options.outOpeningFileName.split('.')[-1] != "vtp":
+            if not options.quiet:
+                print "[Error] Name specified for buffer opening points should end with suffix .vtp!"
+            raise IOError("Name specified for buffer opening points should end with suffix .vtp!")
+
         if type(options.omitted) != None and type(options.omitted) != str:
             raise TypeError("Omit dril coordinates should be specified with strings")
         else:
@@ -84,7 +90,7 @@ def main(args):
         polyline.SetPoints(points)
         polylineWriter = vtk.vtkXMLPolyDataWriter()
         polylineWriter.SetInputData(polyline)
-        polylineWriter.SetFileName("./tmp.vtp")
+        polylineWriter.SetFileName(options.outputOpening)
 
         if writer.Write() != 1:
             if not options.quiet:
@@ -92,7 +98,7 @@ def main(args):
             return 1
         else:
             if not options.quiet:
-                print "Successful. File written to %s"%(options.outFileName)
+                print "Successful. File written to %s"%(options.outOpeningFileName)
             if polylineWriter.Write() != 1:
                 if not options.quiet:
                     print "[Error] Opening line write failed"
