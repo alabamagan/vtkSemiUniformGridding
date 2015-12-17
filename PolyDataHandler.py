@@ -12,8 +12,8 @@ class CenterLineHandler(vtk.vtkPolyData):
         self.filename = filename
         self._reader = None
         self._renderer = vtk.vtkRenderer()
-        self._renderWindow = vtk.vtkRenderWindow()
-        self._renderWindowInteractor = vtk.vtkRenderWindowInteractor()
+        # self._renderWindow = vtk.vtkRenderWindow()
+        # self._renderWindowInteractor = vtk.vtkRenderWindowInteractor()
         self._IS_READ_FLAG=False
 
     def Read(self, m_forceRead=False):
@@ -259,8 +259,8 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
         self.filename = filename
         self._reader = None
         self._renderer = vtk.vtkRenderer()
-        self._renderWindow = vtk.vtkRenderWindow()
-        self._renderWindowInteractor = vtk.vtkRenderWindowInteractor()
+        # self._renderWindow = vtk.vtkRenderWindow()
+        # self._renderWindowInteractor = vtk.vtkRenderWindowInteractor()
         self._IS_READ_FLAG=False
         self._openingMarker = openingMarker
         self._bufferAngle = 0
@@ -365,7 +365,7 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
         m_vtkpoints = m_cutter.GetOutput().GetPoints()
         return m_vtkpoints
 
-    def GetSemiUniDistnaceGrid(self, m_holePerSlice, m_numberOfSlice, m_errorTolerance=1, m_startPadding = 0, m_endPadding=0, m_bufferDeg=self._bufferAngle):
+    def GetSemiUniDistnaceGrid(self, m_holePerSlice, m_numberOfSlice, m_errorTolerance=1, m_startPadding = 0, m_endPadding=0, m_bufferDeg=40):
         """
         Obtain a set of coordinates roughly equal to a projection of periodic square grid vertex on the arm
         surface.
@@ -375,13 +375,16 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
         :param m_errorTolerance:    [float] The maximum allowed deviation of hole coordinate from idea grid
         :param m_startPadding:      [int]   Starting side padding where no holes will be drilled
         :param m_endPadding:        [int]   Ending side padding where no holes will be drilled
-        :param m_bufferDeg:         [float] Angle between planes where buffers zones are in between.
+        :param m_bufferDeg:         [float] Angle between planes where buffers zones are in between. Default to 40
         :return: [list] List of hole coordinates
         """
         vtkmath = vtk.vtkMath()
 
         if not self._centerLine._IS_READ_FLAG:
             self._centerLine.Read()
+
+        if self._bufferAngle != None:
+            m_bufferDeg = self._bufferAngle
 
         m_totalDistance = 0
         for i in xrange(1 + m_startPadding, self._centerLine._data.GetNumberOfPoints() - m_endPadding):
