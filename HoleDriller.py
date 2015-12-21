@@ -5,10 +5,10 @@ Date: 2015-12-08 6:21PM
 
 Return exit code  list:
 0   Success
-1   Most likely Write Failed
-2   Cannot find surface/centerline files *OR* format of the input file is not correct
-3   Error tolerance errors, please set larger error tolerance
-
+1   IOError - Most likely Write Failed
+2   IOError - Cannot find surface/centerline files *OR* format of the input file is not correct
+3   RuntimeError - Tolerance errors, please set larger error tolerance
+4   ValueError - Slice alpha vector search reaches maximum tolerance
 """
 
 from PolyDataHandler import CenterLineHandler, ArmSurfaceHandler
@@ -112,6 +112,11 @@ def main(args):
         if not options.quiet:
             print "[Error] Current error tolerence setting is to low to produce anything."
         return 3
+    except ValueError:
+        if not options.quiet:
+            print "[Error] Slice Alpha Vector search reaches maximum tolerance."
+        return 4
+
 
 if __name__ == '__main__':
     exitCode = main(sys.argv)
