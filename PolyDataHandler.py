@@ -387,10 +387,11 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
             m_bufferDeg = self._bufferAngle
 
         m_totalDistance = 0
-        for i in xrange(1 + m_startPadding, self._centerLine._data.GetNumberOfPoints() - m_endPadding):
+        for i in xrange(1 + int(m_startPadding/0.3), self._centerLine._data.GetNumberOfPoints() - int(m_endPadding/0.3)):
             m_totalDistance += self._centerLine.GetDistance(i, i-1)
 
-        m_sliceSpacing = (m_totalDistance - m_startPadding - m_endPadding)*0.98/(m_numberOfSlice)
+        # Shrink the distance a bit before deviding it so that all intervals will lie in the padded segment
+        m_sliceSpacing = (m_totalDistance)*0.98/(m_numberOfSlice)
         m_intervalIndexes = self._centerLine.GetEqualDistanceIntervalsIndex(m_sliceSpacing, m_startPadding, m_endPadding)
         self._centerLineIntervals = m_intervalIndexes
 
