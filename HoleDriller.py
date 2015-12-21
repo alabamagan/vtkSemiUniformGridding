@@ -56,7 +56,7 @@ def main(args):
         if type(options.omitted) != None and type(options.omitted) != str:
             raise TypeError("Omit dril coordinates should be specified with strings")
         else:
-            openingMarker = [int(options.omitted.split(',')[i]) for i in xrange(3)]
+            openingMarker = [float(options.omitted.split(',')[i]) for i in xrange(3)]
 
 
         # create center line object
@@ -90,7 +90,7 @@ def main(args):
         polyline.SetPoints(points)
         polylineWriter = vtk.vtkXMLPolyDataWriter()
         polylineWriter.SetInputData(polyline)
-        polylineWriter.SetFileName(options.outputOpening)
+        polylineWriter.SetFileName(options.outOpeningFileName)
 
         if writer.Write() != 1:
             if not options.quiet:
@@ -98,7 +98,7 @@ def main(args):
             return 1
         else:
             if not options.quiet:
-                print "Successful. File written to %s"%(options.outOpeningFileName)
+                print "Successful. File written to %s"%(options.outFileName)
             if polylineWriter.Write() != 1:
                 if not options.quiet:
                     print "[Error] Opening line write failed"
