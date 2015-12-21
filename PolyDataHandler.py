@@ -237,11 +237,16 @@ class CenterLineHandler(vtk.vtkPolyData):
     def GetNormalizedTangent(self, m_pointID, range=3, step=1):
         m_indexlist = [m_pointID + i for i in xrange(-range, range+1, step)]
         m_preAverage = [0,0,0]
+        m_loopFactor = 0
         for i in m_indexlist:
             l_n = [self._data.GetPoint(i % self._data.GetNumberOfPoints())[k] - self._data.GetPoint((i - 1) % self._data.GetNumberOfPoints())[k] for k in xrange(3)]
             l_magnitude = math.sqrt(sum([l_n[k]**2 for k in xrange(3)]))
-            m_preAverage = [m_preAverage[k] + l_n[k]/l_magnitude for k in xrange(3)]
-        m_preAverage = [m_preAverage[k]*step/float(2*range+1) for k in xrange(3)]
+            if l_magnitude == 0:
+                continue
+            else:
+                m_preAverage = [m_preAverage[k] + l_n[k]/l_magnitude for k in xrange(3)]
+                m_loopFactor += 1
+        m_preAverage = [m_preAverage[k]*step/float(m_loopFactor) for k in xrange(3)]
         return m_preAverage
 
     def GetPoint(self, m_int):
