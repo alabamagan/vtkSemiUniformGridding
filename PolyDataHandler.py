@@ -432,12 +432,18 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
                 l_ringAlphaVect = [self._openingMarker[j] - m_masterPt[j] for j in xrange(3)]
                 m_alphaNormal = [0,0,0]
                 vtkmath.Cross(m_average, l_ringAlphaVect, m_alphaNormal)
+                m_alphaNormalMag = sum([m_alphaNormal[i] for i in xrange(3)])
+                m_alphaNormal = [m_alphaNormal[i]/m_alphaNormalMag for i in xrange(3)]
 
+            m_loopRing = 0
             for j in xrange(l_slice.GetNumberOfPoints()):
                 l_ringSliceAlphaVect = [l_slice.GetPoint(j)[k] - l_sliceCenter[k] for k in xrange(3)]
-                l_ringSliceMasterVect = [l_slice.GetPoint(j)[k] - m_masterPt[k] for k in xrange(3)]
-                if math.fabs(vtkmath.Dot(l_ringSliceMasterVect, m_alphaNormal)) < 10 and vtkmath.Dot(l_ringSliceAlphaVect, l_ringAlphaVect) > 0:
+                # l_ringSliceMasterVect = [l_slice.GetPoint(j)[k] - m_masterPt[k] for k in xrange(3)]
+                if math.fabs(vtkmath.Dot(l_ringSliceAlphaVect, m_alphaNormal)) < 10 and vtkmath.Dot(l_ringSliceAlphaVect, l_ringAlphaVect) > 0:
                     break
+                # if vtkmath.Dot(l_loopRingSliceAlphaVect, l_ringSliceMasterVect) > m_loopRing:
+                #     m_loopRing = vtkmath.Dot(l_loopRingSliceAlphaVect, l_ringSliceMasterVect)
+                #     l_ringSliceAlphaVect = l_loopRingSliceAlphaVect
 
             l_uniformSectionDegree = (360. - m_bufferDeg)/m_holePerSlice
             l_sectionDegree = (360. - m_bufferDeg)/m_holePerSlice
