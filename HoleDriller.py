@@ -86,8 +86,9 @@ def main(args):
         for i in arm._openingList:
             points.InsertNextPoint(i)
 
-        polyline = vtk.vtkPolyData()
-        polyline.SetPoints(points)
+        # Make a polyline
+        polyline = arm.GetOpenningLine()
+
         polylineWriter = vtk.vtkXMLPolyDataWriter()
         polylineWriter.SetInputData(polyline)
         polylineWriter.SetFileName(options.outOpeningFileName)
@@ -103,6 +104,9 @@ def main(args):
                 if not options.quiet:
                     print "[Error] Opening line write failed"
                 return 1
+            else:
+                if not options.quiet:
+                    print "Openning line written to %s"%(options.outOpeningFileName)
             return 0
     except IOError:
         if not options.quiet:

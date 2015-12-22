@@ -421,9 +421,6 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
             m_closestCenterlinePointId = m_kdtree.FindClosestPoint(self._openingMarker)
             m_closestCenterlinePoint = self._centerLine.GetPoint(m_closestCenterlinePointId)
             m_masterPt = m_closestCenterlinePoint
-            print m_masterPt
-
-
 
         # Drill along intervals
         for i in xrange(len(m_intervalIndexes)):
@@ -572,3 +569,24 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
         if not m_quiet:
             print "Finished: Totaltime used = %.2f s"%(time.time() - t)
         pass
+
+    def GetOpenningLine(self):
+        m_polyline = vtk.vtkPolyData()
+        m_appendfilter = vtk.vtkAppendFilter()
+        for i in xrange(len(self._openingList)-1):
+            l_linesource = vtk.vtkLineSource()
+            l_linesource.SetPoint1(self._openingList[i])
+            l_linesource.SetPoint2(self._openingList[i+1])
+            l_linesource.Update()
+            m_appendfilter.AddInputData(m_polyline)
+            m_appendfilter.AddInputData(l_linesource.GetOutput())
+            m_appendfilter.Update()
+            m_polyline.DeepCopy(m_appendfilter.GetOutput())
+
+        m_geomfilter = vtk.vtkGeometryFilter()
+        m_geomfilter.SetInputConnection(m_appendfilter.GetOutputPort())
+        m_cleanfilter = vtk.vtkCleanPolyData()
+        m_cleanfilter.SetInputConnection(m_geomfilter.GetOutputPort())
+        m_cleanfilter.Update()
+        m_polylineOut = m_cleanfilter.GetOutput()
+        return m_polylineOut
