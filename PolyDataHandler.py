@@ -352,9 +352,10 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
 
     def SliceSurface(self, m_pt, m_normalVector):
         """
-        Use vtkCutter to obtain cutted.
-        :param m_pt:
-        :param m_normalVector:
+        Use vtkCutter to obtain a slice along the centerline direction
+
+        :param m_pt:            [float, float, float] A coordinate on the desired cutting plane
+        :param m_normalVector:  [float, float, float] The normal vector of the cutting plane
         :return:
         """
         m_plane=vtk.vtkPlane()
@@ -373,7 +374,7 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
     def GetSemiUniDistnaceGrid(self, m_holePerSlice, m_numberOfSlice, m_errorTolerance=1, m_startPadding = 0, m_endPadding=0, m_bufferDeg=40):
         """
         Obtain a set of coordinates roughly equal to a projection of periodic square grid vertex on the arm
-        surface.
+        surface. The gird also can arbitrarily has a buffer zone where no holes are drilled.
 
         :param m_holePerSlice:      [int]   Desired number of holes per slice
         :param m_numberOfSlice:     [int]   Desired number of slices
@@ -437,6 +438,7 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
                 m_alphaNormalMag = sum([m_alphaNormal[i] for i in xrange(3)])
                 m_alphaNormal = [m_alphaNormal[i]/m_alphaNormalMag for i in xrange(3)]
 
+            # Define an initial accuracy which relax if no suitable points is found, affects calculation speed
             m_loopAccuracy = 0.25
             m_ringSliceAlphaVect = None
             while  m_ringSliceAlphaVect == None:
@@ -449,6 +451,7 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
                 m_loopAccuracy *= 2
                 if m_loopAccuracy >= 10:
                     raise ValueError("Slice Alpha Vector search reaches maximum tolerance")
+                    break
 
 
             l_uniformSectionDegree = (360. - m_bufferDeg)/m_holePerSlice
@@ -537,6 +540,14 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
         pass
 
     def SphereDrill(self, m_holelist, m_holeRadius, m_quiet=False):
+        """
+        Drill sphere at locations specified by m_holelist.
+
+        :param m_holelist:      [list]  A list of coordinates where holes are to be drilled
+        :param m_holeRadius:    [float] The radius of the hole to drill
+        :param m_quiet:         [bool]
+        :return:
+        """
         m_totalNumOfHoles = len(m_holelist)
         if not m_quiet:
             t = time.time()
