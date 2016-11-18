@@ -29,8 +29,10 @@ def main(args):
     parser.add_option("-r", "--radius", action="store", dest="radius", type=float, default=5, help="Set hole radius required")
     parser.add_option("-p", "--padding", action="store", dest="padding", type=str, default="20,10", help="Set padding level where no holes are drilled")
     parser.add_option("-e", "--errorTorlerance", action="store", dest="error", type=float, default=1, help="Set maximum error tolerance from idea grid in degrees")
-    parser.add_option("-d", "--noDrillCoord", action="store", dest="omitted", default=None, help="Set the coordinates of no-drill area")
-    parser.add_option("-b", "--bufferAngle", action="store", dest="bufferAngle", type=float, default=40, help="Buffer angle which decide the buffer area, calculated in degrees")
+    parser.add_option("-d", "--noDrillCoord", action="store", dest="omitted", default=None, help="Set the coordinates start drilling area")
+    parser.add_option("-b", "--bufferAngle", action="store", dest="bufferAngle", type=float, default=0, help="Buffer angle which decide the buffer area, calculated in degrees")
+    parser.add_option("-B", "--bufferPolyLines", action="store", dest="bufferPDs", type=str, default="",
+                      help="Specify buffer region by polylines. Seperate filenames with ';'.")
     parser.add_option("-a", "--auto", action="store_true", dest="auto", default=False, help="Automatically determine parameters")
 
     (options, args) = parser.parse_args()
@@ -53,8 +55,8 @@ def main(args):
                 print "[Error] Name specified for buffer opening points should end with suffix .vtp!"
             raise IOError("Name specified for buffer opening points should end with suffix .vtp!")
 
-        if type(options.omitted) != None and type(options.omitted) != str:
-            raise TypeError("Omit dril coordinates should be specified with strings")
+        if type(options.omitted) != None and type(options.omitted) != str and options.bufferAngle != 0:
+            raise TypeError("[Error] Start drill coordinates should be specified with strings")
         else:
             openingMarker = [float(options.omitted.split(',')[i]) for i in xrange(3)]
 
@@ -66,7 +68,10 @@ def main(args):
         # careate arm object
         arm = ArmSurfaceHandler(surfaceFileName, cl, openingMarker)
         arm.Read()
-        arm.SetBufferAngle(options.bufferAngle)
+        if (options.bufferAngle > 0):
+            arm.SetBufferAngle(options.bufferAngle)
+        elif (options.bufferPDs != ""):
+            arm.SetBufferPolyLines(options.bufferPolyLines)
 
         # Get a list of holes and then drill
         holelist = arm.GetSemiUniDistnaceGrid(options.holesPerSlice + 1, options.numOfSlice - 1, options.error, startPadding, endPadding)
@@ -108,17 +113,17 @@ def main(args):
                 if not options.quiet:
                     print "Openning line written to %s"%(options.outOpeningFileName)
             return 0
-    except IOError:
+    except IOError, err:
         if not options.quiet:
-            print "[Error] File IO error, please check file format and file directory."
+            print str(err)
         return 2
-    except RuntimeError:
+    except RuntimeError, err:
         if not options.quiet:
-            print "[Error] Current error tolerence setting is to low to produce anything."
+            print str(err)
         return 3
-    except ValueError:
+    except ValueError, err:
         if not options.quiet:
-            print "[Error] Slice Alpha Vector search reaches maximum tolerance."
+            print str(err)
         return 4
 
 

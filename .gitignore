@@ -1,0 +1,6 @@
+*pyc
+Data/*
+Output/*
+*.stl
+*.vtp
+idea/workspace.xml

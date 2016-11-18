@@ -42,39 +42,54 @@ class CenterLineHandler(vtk.vtkPolyData):
         m_actor.SetMapper(m_mapper)
 
         # Reconstruct centerline polydata
-        m_points = vtk.vtkPoints()
+        # m_points = vtk.vtkPoints()
+        # m_rawData = m_reader.GetOutput()
+        # m_rawStart = m_rawData.GetPoint(m_rawData.GetNumberOfPoints() - 2)
+        # m_rawStartMiddle = m_rawData.GetPoint(0)
+        # m_points.InsertNextPoint(m_rawStart)
+        #
+        # m_startDirection = [m_rawStartMiddle[i] - m_rawStart[i] for i in xrange(3)]
+        # m_startLength = math.sqrt(sum([m_startDirection[i]**2 for i in xrange(3)]))
+        # m_startNumOfIntervals = int(m_startLength/0.3)
+        #
+        # # Populate start region
+        # for i in xrange(m_startNumOfIntervals):
+        #     m_rawStart = [m_rawStart[j] + m_startDirection[j] / m_startNumOfIntervals for j in xrange(3)]
+        #     m_points.InsertNextPoint(m_rawStart)
+        #
+        # # Push back nodes in original middle segment
+        # for i in xrange(m_rawData.GetNumberOfPoints() - 2):
+        #     m_points.InsertNextPoint(m_rawData.GetPoint(i))
+        #
+        # # Populate the ending region
+        # m_rawEnd = m_rawData.GetPoint(m_rawData.GetNumberOfPoints() - 1)
+        # m_rawEndMiddle = m_rawData.GetPoint(m_rawData.GetNumberOfPoints() - 3)
+        # m_endDirection = [m_rawEnd[i] - m_rawEndMiddle[i] for i in xrange(3)]
+        # m_endLength = math.sqrt(sum([m_endDirection[i]**2 for i in xrange(3)]))
+        # m_endNumOfIntervals = int(m_endLength/0.3)
+        # for i in xrange(m_endNumOfIntervals):
+        #     m_rawEndMiddle = [m_rawEndMiddle[j] + m_endDirection[j] / m_endNumOfIntervals for j in xrange(3)]
+        #     m_points.InsertNextPoint(m_rawEndMiddle)
+
+        # Use spline filter to reconstruct the centerpolyline
         m_rawData = m_reader.GetOutput()
-        m_rawStart = m_rawData.GetPoint(m_rawData.GetNumberOfPoints() - 2)
-        m_rawStartMiddle = m_rawData.GetPoint(0)
-        m_points.InsertNextPoint(m_rawStart)
 
-        m_startDirection = [m_rawStartMiddle[i] - m_rawStart[i] for i in xrange(3)]
-        m_startLength = math.sqrt(sum([m_startDirection[i]**2 for i in xrange(3)]))
-        m_startNumOfIntervals = int(m_startLength/0.3)
+        spline = vtk.vtkCardinalSpline()
+        spline.SetLeftConstraint(2)
+        spline.SetLeftValue(0)
+        spline.SetRightConstraint(2)
+        spline.SetRightValue(0)
 
-        # Populate start region
-        for i in xrange(m_startNumOfIntervals):
-            m_rawStart = [m_rawStart[j] + m_startDirection[j] / m_startNumOfIntervals for j in xrange(3)]
-            m_points.InsertNextPoint(m_rawStart)
-
-        # Push back nodes in original middle segment
-        for i in xrange(m_rawData.GetNumberOfPoints() - 2):
-            m_points.InsertNextPoint(m_rawData.GetPoint(i))
-
-        # Populate the ending region
-        m_rawEnd = m_rawData.GetPoint(m_rawData.GetNumberOfPoints() - 1)
-        m_rawEndMiddle = m_rawData.GetPoint(m_rawData.GetNumberOfPoints() - 3)
-        m_endDirection = [m_rawEnd[i] - m_rawEndMiddle[i] for i in xrange(3)]
-        m_endLength = math.sqrt(sum([m_endDirection[i]**2 for i in xrange(3)]))
-        m_endNumOfIntervals = int(m_endLength/0.3)
-        for i in xrange(m_endNumOfIntervals):
-            m_rawEndMiddle = [m_rawEndMiddle[j] + m_endDirection[j] / m_endNumOfIntervals for j in xrange(3)]
-            m_points.InsertNextPoint(m_rawEndMiddle)
+        splineFilter = vtk.vtkSplineFilter()
+        splineFilter.SetSpline(spline)
+        splineFilter.SetInputData(m_rawData)
+        splineFilter.SetNumberOfSubdivisions(500)
+        splineFilter.Update()
 
         m_data = vtk.vtkPolyData()
-        m_data.SetPoints(m_points)
+        m_data.DeepCopy(splineFilter.GetOutput())
 
-
+        self._actor = m_actor
         self._reader = m_reader
         self._renderer.AddActor(m_actor)
         self._rawData = m_rawData
@@ -269,6 +284,7 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
         self._IS_READ_FLAG=False
         self._openingMarker = openingMarker
         self._bufferAngle = 0
+        self._bufferRegionList = []
 
         # Read Centerline if it is not read before assignment
         centerline.Read()
@@ -277,6 +293,18 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
     def SetBufferAngle(self, angle):
         self._bufferAngle = float(angle)
         pass
+
+    def SetBufferPolyLines(self, filenames):
+        filenames = filenames.split(';')
+        reader = vtk.vtkXMLPolyDataReader()
+        for filename in filenames:
+            self._bufferRegionList.append(vtk.vtkPolyData())
+            reader.SetFileName(filenames)
+            reader.Update()
+            self._bufferRegionList[-1].DeepCopy(reader.GetOutput())
+
+
+
 
     def IsRead(self):
         return self._IS_READ_FLAG
@@ -307,6 +335,7 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
         m_actor = vtk.vtkActor()
         m_actor.SetMapper(m_mapper)
 
+        self._actor = m_actor
         self._reader = m_reader
         self._renderer.AddActor(m_actor)
         self._data = m_reader.GetOutput()
@@ -368,10 +397,59 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
         m_cutter.SetInputConnection(self._reader.GetOutputPort())
         m_cutter.Update()
 
-        m_vtkpoints = m_cutter.GetOutput().GetPoints()
+        for i in xrange(m_cutter.GetOutput().GetNumberOfPoints()):
+            l_ids = vtk.vtkIdList()
+            m_cutter.GetOutput().GetPointCells(i,l_ids)
+            if (l_ids.GetNumberOfIds() < 2):
+                os.path.isdir("./Debug/")
+                writer = vtk.vtkXMLPolydataWriter()
+                writer.SetFileName("./Debug/Error.vtp")
+                writer.SetInputData(m_cutter.GetOutput())
+                writer.Update()
+                writer.Write()
+                raise RuntimeError("[Error] This is not a loop!")
+
+
+
+        # Interpolate the slice before proceeding
+        spline = vtk.vtkCardinalSpline()
+        spline.SetLeftConstraint(2)
+        spline.SetLeftValue(0)
+        spline.SetRightConstraint(2)
+        spline.SetRightValue(0)
+
+        splineFilter = vtk.vtkSplineFilter()
+        splineFilter.SetSpline(spline)
+        splineFilter.SetInputData(m_cutter.GetOutput())
+        splineFilter.SetNumberOfSubdivisions(10)
+        splineFilter.Update()
+
+        m_vtkpoints = splineFilter.GetOutput()
         return m_vtkpoints
 
-    def GetSemiUniDistnaceGrid(self, m_holePerSlice, m_numberOfSlice, m_errorTolerance=1, m_startPadding = 0, m_endPadding=0, m_bufferDeg=40):
+
+    def SliceSurfaceCutter(self, m_pt, m_normalVector):
+        """
+        Use vtkCutter to obtain a slice along the centerline direction
+
+        :param m_pt:            [float, float, float] A coordinate on the desired cutting plane
+        :param m_normalVector:  [float, float, float] The normal vector of the cutting plane
+        :return:
+        """
+        m_plane=vtk.vtkPlane()
+        m_plane.SetOrigin(m_pt)
+        m_plane.SetNormal(m_normalVector)
+
+        #create cutter
+        m_cutter=vtk.vtkCutter()
+        m_cutter.SetCutFunction(m_plane)
+        m_cutter.SetInputConnection(self._reader.GetOutputPort())
+        m_cutter.Update()
+
+
+        return m_cutter
+
+    def GetSemiUniDistnaceGrid(self, m_holePerSlice, m_numberOfSlice, m_errorTolerance=1, m_startPadding = 0, m_endPadding=0, m_bufferDeg=0):
         """
         Obtain a set of coordinates roughly equal to a projection of periodic square grid vertex on the arm
         surface. The gird also can arbitrarily has a buffer zone where no holes are drilled.
@@ -426,6 +504,13 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
         for i in xrange(len(m_intervalIndexes)):
             l_sliceCenter = self._centerLine.GetPoint(m_intervalIndexes[i])
             l_slice = self.SliceSurface(l_sliceCenter, m_average)
+
+            writer = vtk.vtkXMLPolyDataWriter()
+            writer.SetInputData(l_slice)
+            writer.SetFileName("./Output/Slice%02i.vtp"%i)
+            writer.Update()
+            writer.Write()
+
             if i == 0:
                 # Define the starting vector for all slice
                 # l_ringAlphaPt = l_slice.GetPoint(i)
@@ -465,16 +550,20 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
                     vtkmath.Cross(l_ringSliceAlphaVect, l_ringVect,l_p1)
                     l_p2 = vtkmath.Dot(l_p1, m_average)
                     l_angleBetweenRunningAndInitialVector = vtkmath.AngleBetweenVectors(l_ringSliceAlphaVect, l_ringVect)
+
                     if l_angleBetweenRunningAndInitialVector > vtkmath.RadiansFromDegrees(l_sectionDegree - m_errorTolerance/2) and l_angleBetweenRunningAndInitialVector < vtkmath.RadiansFromDegrees(l_sectionDegree + m_errorTolerance/2.)and l_p2 > 0:
                         l_ringSliceAlphaVect = l_ringVect
                         l_holeList.append([l_ringVect[k] + l_sliceCenter[k] for k in xrange(3)])
                         l_sectionDegree += (l_uniformSectionDegree - vtkmath.DegreesFromRadians(l_angleBetweenRunningAndInitialVector))
                         break
                 if l_loopbreak == m_holePerSlice:
-                    raise RuntimeError("Current error tolerence setting is to low to produce anything.")
+                    raise RuntimeError("[Error] Current error tolerence setting is to low to produce anything.")
                 l_loopbreak += 1
             m_holeList.extend(l_holeList)
             self._openingList = m_openingList
+
+        self._averageTangent = m_average
+        self._holeList = m_holeList
         return m_holeList
 
     def GetPointActor(self, m_ptId, m_radius=1, m_color=[0.5,0.5,0]):
@@ -551,10 +640,11 @@ class ArmSurfaceHandler(vtk.vtkPolyData):
             print "Drilling"
 
         for i in xrange(m_totalNumOfHoles):
+            # TODO: check if the hole is near the opening gap area
+
             m_sphere = vtk.vtkSphere()
             m_sphere.SetCenter(m_holelist[i])
             m_sphere.SetRadius(m_holeRadius)
-
 
             clipper = vtk.vtkClipPolyData()
             clipper.SetInputData(self._data)
