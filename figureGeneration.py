@@ -123,7 +123,7 @@ def figureSlice():
     print "Reading arm surface finished..."
 
     sliceactors = []
-    arm.GetSemiUniDistnaceGrid(10,9,5,25,25,40)
+    arm.GetSemiUniDistnaceGrid(10, 9, 5, 25, 25, 40)
     for clinterval in arm._centerLineIntervals:
         cutter = arm.SliceSurfaceCutter(cl.GetPoint(clinterval), arm._averageTangent)
         sm = vtk.vtkPolyDataMapper()
@@ -174,7 +174,7 @@ def figureSphere():
     print "Reading arm surface finished..."
 
     sphereActors = []
-    arm.GetSemiUniDistnaceGrid(18,9,5,25,25,40)
+    arm.GetSemiUniDistnaceGrid(18, 9, 5, 25, 25, 40)
     for i in xrange(17):
         ssource = vtk.vtkSphereSource()
         ssource.SetCenter(arm._holeList[i])
@@ -227,8 +227,7 @@ def figureDrilled():
     arm.Read()
     print "Reading arm surface finished..."
 
-
-    arm.GetSemiUniDistnaceGrid(18,9,5,25,25,40)
+    arm.GetSemiUniDistnaceGrid(18, 9, 5, 25, 25, 40)
 
 
     arm.SphereDrill(arm._holeList, 3)

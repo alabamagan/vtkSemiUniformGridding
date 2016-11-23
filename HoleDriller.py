@@ -11,11 +11,14 @@ Return exit code  list:
 4   ValueError - Slice alpha vector search reaches maximum tolerance
 """
 
-from PolyDataHandler import CenterLineHandler, ArmSurfaceHandler
-import vtk
 import optparse
-import sys
 import os
+import sys
+
+import vtk
+
+from PolyDataHandler import CenterLineHandler, ArmSurfaceHandler
+
 
 def main(args):
     parser = optparse.OptionParser()
@@ -31,9 +34,12 @@ def main(args):
     parser.add_option("-e", "--errorTorlerance", action="store", dest="error", type=float, default=1, help="Set maximum error tolerance from idea grid in degrees")
     parser.add_option("-d", "--noDrillCoord", action="store", dest="omitted", default=None, help="Set the coordinates start drilling area")
     parser.add_option("-b", "--bufferAngle", action="store", dest="bufferAngle", type=float, default=0, help="Buffer angle which decide the buffer area, calculated in degrees")
-    parser.add_option("-B", "--bufferPolyLines", action="store", dest="bufferPDs", type=str, default="",
-                      help="Specify buffer region by polylines. Seperate filenames with ';'.")
+    parser.add_option("-B", "--bufferPolyLines", action="store", dest="bufferPDs", type=str, default=None,
+                      help="Specify buffer region by polylines. Seperate filenames with ';'. If this option is selected, buffer angle will be ignored.")
+    parser.add_option("-t", "--twoSides", action="store_true", dest="twoSides", default=False,
+                      help="If this option is selected, there will be two openning buffer space and output will consist two polylines in one polydata.")
     parser.add_option("-a", "--auto", action="store_true", dest="auto", default=False, help="Automatically determine parameters")
+
 
     (options, args) = parser.parse_args()
     surfaceFileName = options.surface
@@ -70,11 +76,13 @@ def main(args):
         arm.Read()
         if (options.bufferAngle > 0):
             arm.SetBufferAngle(options.bufferAngle)
-        elif (options.bufferPDs != ""):
-            arm.SetBufferPolyLines(options.bufferPolyLines)
+        elif (options.bufferPDs != None):
+            arm.SetBufferPolyLines(options.bufferPDs)
+            arm.SetBufferAngle(0)
 
         # Get a list of holes and then drill
-        holelist = arm.GetSemiUniDistnaceGrid(options.holesPerSlice + 1, options.numOfSlice - 1, options.error, startPadding, endPadding)
+        holelist = arm.GetSemiUniDistnaceGrid(options.holesPerSlice + 1, options.numOfSlice - 1, options.error,
+                                              startPadding, endPadding, options.bufferAngle, options.twoSides)
         arm.SphereDrill(holelist, options.radius, options.quiet)
 
         clippermapper = vtk.vtkPolyDataMapper()
@@ -87,10 +95,6 @@ def main(args):
         writer.SetFileName(outFileName)
         writer.SetInputData(arm._data)
 
-        points = vtk.vtkPoints()
-        for i in arm._openingList:
-            points.InsertNextPoint(i)
-
         # Make a polyline
         polyline = arm.GetOpenningLine()
 
@@ -100,14 +104,18 @@ def main(args):
 
         if writer.Write() != 1:
             if not options.quiet:
-                print "[Error] Write failed..."
+                raise IOError("[Error] Write failed...")
             return 1
         else:
             if not options.quiet:
                 print "Successful. File written to %s"%(options.outFileName)
-            if polylineWriter.Write() != 1:
+
+            if (options.bufferPDs != None):
                 if not options.quiet:
-                    print "[Error] Opening line write failed"
+                    print "No drill region supplied, there will not be opening line output!"
+            elif polylineWriter.Write() != 1:
+                if not options.quiet:
+                    raise IOError("[Error] Opening line write failed")
                 return 1
             else:
                 if not options.quiet:
